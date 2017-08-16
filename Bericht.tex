@@ -4,9 +4,20 @@
 \begin{document}
 \renewcommand{\thepage}{\roman{page}}
 
+\include{Kurzfassung}
 
+\tableofcontents
+\newpage
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
 
+\include{Einleitung}
 
+\include{Motor}
+
+\include{Delta}
+
+\include{Schluss}
 
 \renewcommand{\bibname}{Quellenverzeichnis}
 \include{Quellen}
