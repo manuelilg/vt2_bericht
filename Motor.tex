@@ -2,22 +2,30 @@
 %vorstellen was in diesem Kapitel gesagt werden soll
 %oder eher erklären bsp. Regeln von Motor von EEROS
 
-\section*{Stichworte}
-\begin{itemize}
-\item überblick (zusammen mit EEROS)
-\item Aufbau urdf
-\item verwendung von urdf
-\item gazebo plugins
-\item joint state publisher
-\item rqt plugins
-\end{itemize}
+%\section*{Stichworte}
+%\begin{itemize}
+%\item überblick (zusammen mit EEROS)
+%\item Aufbau urdf
+%\item verwendung von urdf
+%\item gazebo plugins
+%\item joint state publisher
+%\item rqt plugins
+%\end{itemize}
 
-In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie eine Simulation in Gazebo erstellt wird.
+In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie mit \textit{ROS} die Entwicklung einer \textit{EEROS} Applikation unterstützt werden kann. 
+Das System ins diesem Fallbeispiel ist eine Motor"=Baugruppe.
+
+Für dieses System soll im \textit{EEROS} ein Regler entwickelt werden.
+Um die Entwicklung zu unterstützen braucht es Simulation 
+Darum braucht es eine Simulation der Motor"=Baugruppe mit der der Regler getestet werden kann.
+Und auch eine Visualisierung mit der das Verhalten des Regler in einem Plot dargestellt werden kann.
+
+%In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie eine Simulation in Gazebo erstellt wird.
 Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es braucht um ein Simulationsmodell aufzubauen.
 Ein Motor-Baugruppe (Abbildung \ref{Ab:motor-baugruppe}) soll als einfache Beispiel dienen.
 Die Baugruppe besteht aus einem Motor, Schwungrad und linearen Dämpfer.
 Diese drei Komponenten sind mit einander verbunden.
-Der lineare Dämpfer ist realisiert als zweiter kurzgeschlossener Motor.
+Der lineare Dämpfer ist realisiert mit einem zweiten kurzgeschlossenen Motor.
 
 \begin{figure}[ht!]
 \centering
