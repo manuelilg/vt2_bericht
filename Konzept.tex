@@ -8,6 +8,7 @@
 \item Verweis zu Mäsis Arbeit
 \item urdf, sdf vorstellen und erklären, hier??? oder in Motor
 \end{itemize}
+%TODO erwähnen systemen -> ist eine mechatronisches system gemein aus Aktor,...  -> roboter
 
 Eine Skizze des Konzeptes ist in der Abbildung %TODO ref
 zusehen.
@@ -50,37 +51,71 @@ Das Visualisierungs"=Tool \textit{rviz} ist für die Darstellung von Systemen ge
 Dabei können z.B. Zustände von einem Roboter visualisiert werden oder Sensor"=Daten wie von einer 3D"=Kamera.
 
 Ein System besteht aus mehren Körpern.
-Um sie darzustellen braucht es Informationen über das Aussehen und Form dieser.
+Um sie darzustellen braucht es unter anderem Informationen über das Aussehen und Form dieser.
 Diese Informationen müssen dem \textit{rviz} über eine \textit{urdf}"=File zur Verfügung gestellt werden. %TODO ref urdf
-Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper die Position und Orientierung von diesem im Raum.
+Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper noch die Position und Orientierung von diesem im Raum.
 Deshalb müssen dem \textit{rviz} stetig Koordinaten-Daten für jeden Körper übermittelt werden. %TODO ref tf
 
 \subsection{rqt}
 \textit{rqt} ist Framework für die GUI Entwicklung in \textit{ROS}.
 Diese GUI's werden als Plugins implementiert.
 Somit können mehre GUI's in einem \textit{rqt}"=Fenster verwendet werden.
-Für die Darstellung von zeit veränderlichen Parametern wir das Plugin \textit{multiplot} verwendet. %TODO ref und bild?
+Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins. %TODO ref plugin list
+Es können aber auch selbst programmiert Plugins verwendet werden. 
+Für die Darstellung von zeit veränderlichen Parametern wird das Plugin \textit{multiplot} verwendet. %TODO ref und bild?
 
 %gui-tool, für das plugins vorhanden sind oder selber geschrieben werden können
 %hat für viele gängige ros-cli-tools ein rqt-plugin
 
 
-\section{Model-Beschreibung}
-% oder System
+\section{System-Beschreibung}
+%TODO titel mehrdeutig mehr so was wie: Datei-formate für beschreibung von Systemen, repräsentation, abbildung, Format für repräsentation von Systemen
 
-
-
-\subsection{URDF-Unified Robot Description Format}
-% problem: wie anfangen: besch. urdf und sdf oder urdf dann erst sdf
-urdf vorstellen
+Die Programme \textit{Gazebo} und \textit{rviz} verwenden für die Beschreibung der Systeme unterschiedliche Datei"=Formate.
+In diesem Abschnitt werden diese beiden XML"=Formate kurz vorgestellt.
+Sie können beide kinematische Strukturen repräsentieren.
+Die zwei Hauptkomponenten für die Beschreibung dieser Struktur sind das Glied (Link) und das Gelenk (Joint).
+Für jedes gib es ein entsprechendes XML"=Element.
+Die Beziehung zwischen den beiden Komponenten ist in der Abbildung xx zusehen. %TODO ref
 %bilder -> https://ni.www.techfak.uni-bielefeld.de/files/URDF-XACRO.pdf
 
-\begin{itemize}
-\item XML format
-\item kinematic tree structure
-\end{itemize}
+% woh? erwähnen notation rpy -> ypr -> x-achse im = rotations achse 
 
 \subsubsection*{Link}
 
 \subsubsection*{Joint}
+
+\subsection{URDF-Unified Robot Description Format}
+Das \textit{URDF}"=Format wird standardmässig in \textit{ROS} verwendet, für die Beschreibung von Systemen.
+Es kann nur kinematische Strukturen abbilden die einen Baum"=Form haben.
+Somit können keine geschlossenen kinematischen Ketten beschrieben werden.
+
+
+\subsection{SDF-Simulation Description Format}
+Das \textit{SDF}"=Format wird bis jetzt ausschliesslich im \textit{Gazebo} verwendet.
+Es kann kinematische Graph-Strukturen abbilden.
+Deshalb könne auch geschlossenen kinematische Ketten beschrieben werden.
+
+\subsection{Vereinfachung}
+%TODO titel
+\subsubsection{Konvertierung}
+Damit für ein System nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
+Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
+Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
+Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
+%TODO ref auf kapitel in delta
+
+\subsubsection{XACRO}
+\textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
+Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien erstellt werden.
+Denn mit Hilfe der Makros können Wiederholungen vermieden werden.
+Auch kann Dank \textit{XACRO} eine XML"=Datei in mehrere Unterdateien logisch aufgeteilt werden.
+%TODO vortiele einsezen in delta
+Im Kapitel XX werden die Vorteile von \textit{XACRO} Anhand des Delta-Roboters 
+
+\subsection{TF}
+% erklären wie tf erzeugen tf = Transform, coordinate frame data
+verweis rviz braucht tf daten
+
+abklären ob absolute frames oder relative/tf
 
