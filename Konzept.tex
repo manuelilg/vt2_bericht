@@ -28,7 +28,9 @@ Der Zustand von einem System kann zum Beispiel die Winkel"=Position eines Motors
 Die Zustände und Grössen eines Systems werden visualisiert egal ob an einem realen oder ein simulierten System gearbeitet wird. %TODO umformulieren
 
 Für die Simulation von Systemen wird \textit{Gazebo} eingesetzt.
-Die Darstellung von den System Zuständen wird mit \textit{rviz} realisiert. Und für die Darstellung von den Grössen in Graph"=Plots wird \textit{rqt} eingesetzt.
+Die Darstellung von den System Zuständen wird mit \textit{rviz} realisiert.
+Für die Visualisierung der Grössen werden Plots eingesetzt.
+Für das erzeugen der Plots wird das \textit{rqt} Plugin multiplot eingesetzt.
 
 %Das Konzept kann in mehrere Bereich aufgeteilt werden.
 %Die Simulation des Systems, die Visualisierung des Zustandes vom System und der KontrollerEEROS.
@@ -47,8 +49,8 @@ Das File ist im XML"=Format aufgebaut.
 Um \textit{Gazebo} mit Funktionen zu erweitern können Plugins verwendet werden.
 Dabei kann man schon fertige Plugins verwenden oder selber eines programmieren. %TODO ref auf fertige plugins
 
-\section{Darstellung}
-\subsection{rviz}
+%\section{Darstellung}
+\section{rviz}
 \begin{itemize}
 \item darstellen von System und deren Zuständen
 \item benötigt urdf-file für Darstellung
@@ -62,13 +64,14 @@ Diese Informationen müssen dem \textit{rviz} über eine \textit{urdf}"=File zur
 Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper noch die Position und Orientierung von diesem im Raum.
 Deshalb müssen dem \textit{rviz} stetig Koordinaten-Daten für jeden Körper übermittelt werden. %TODO ref tf
 
-\subsection{rqt}
+
+\section{rqt}
 \textit{rqt} ist Framework für die GUI Entwicklung in \textit{ROS}.
 Diese GUI's werden als Plugins implementiert.
 Somit können mehre GUI's in einem \textit{rqt}"=Fenster verwendet werden.
 Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins. %TODO ref plugin list
 Es können aber auch selbst programmiert Plugins verwendet werden. 
-Für die Darstellung von zeit veränderlichen Parametern wird das Plugin \textit{multiplot} verwendet. %TODO ref und bild?
+Für die Darstellung von den zeit veränderlichen Grössen des Systems wird das Plugin \textit{multiplot} eingesetzt. %TODO ref und bild?
 
 %gui-tool, für das plugins vorhanden sind oder selber geschrieben werden können
 %hat für viele gängige ros-cli-tools ein rqt-plugin
@@ -80,7 +83,31 @@ Für die Darstellung von zeit veränderlichen Parametern wird das Plugin \textit
 Die Programme \textit{Gazebo} und \textit{rviz} verwenden für die Beschreibung der Systeme unterschiedliche Datei"=Formate.
 In diesem Abschnitt werden diese beiden XML"=Formate kurz vorgestellt.
 Sie können beide kinematische Strukturen repräsentieren.
-Die zwei Hauptkomponenten für die Beschreibung dieser Struktur sind das Glied (Link) und das Gelenk (Joint).
+Diese Strukturen werden als Modell bezeichnet.
+%Der Aufbau eines Modells wird im Kapitel xx erleutert. %TODO ref
+
+\subsection{URDF-Unified Robot Description Format}
+Das \textit{URDF}"=Format wird standardmässig in \textit{ROS} verwendet, für die Beschreibung von Systemen.
+Es kann nur kinematische Strukturen abbilden die einen Baum"=Form haben.
+Somit können keine geschlossenen kinematischen Ketten beschrieben werden.
+Im Kapitel xx wird beschrieben wie ein \textit{URDF}"=Model aufgebaut werden kann. %TODO ref
+
+\subsection{SDF-Simulation Description Format}
+Das \textit{SDF}"=Format wird bis jetzt ausschliesslich im \textit{Gazebo} verwendet.
+Es kann kinematische Graph-Strukturen abbilden.
+Deshalb könne auch geschlossenen kinematische Ketten beschrieben werden.
+
+\subsubsection{Konvertierung}
+Damit für ein System nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
+Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
+Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
+Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
+In welchen Fällen es solche spezial Elemente braucht und wie sie eingesetzt werden wird im Kapitel xx behandelt. %TODO ref 
+%TODO ref auf kapitel in delta/motor
+
+
+\subsection{Modell}
+Ein Modell besteht aus den zwei Elementen Glied (Link) und Gelenk (Joint).
 Für jedes gib es ein entsprechendes XML"=Element.
 Die Beziehung zwischen den beiden Komponenten ist in der Abbildung xx zusehen. %TODO ref
 %bilder -> https://ni.www.techfak.uni-bielefeld.de/files/URDF-XACRO.pdf
@@ -88,28 +115,29 @@ Die Beziehung zwischen den beiden Komponenten ist in der Abbildung xx zusehen. %
 % woh? erwähnen notation rpy -> ypr -> x-achse im = rotations achse 
 
 \subsubsection*{Link}
+Das Link"=Element beschreibt einen einzelne starr Körper in einem System.
+Die Beschreibung besteht aus:
+\begin{itemize}
+\item Massenträgheit
+\item Geometrie und Material für Aussehen
+\item Geometrie für Kollisionsberechnung
+\end{itemize}
+In der Auflistung xx ist zusehen wie ein Link"=Element aufgebaut ist. %TODO ref
 
 \subsubsection*{Joint}
+Mit dem Joint"=Element können Gelenke unterschiedlichster Art beschrieben werden.
+Die Beschreibung besteht aus:
+\begin{itemize}
+\item Gelenk"=Type
+\item Eltern Link"=Element
+\item Kind Link"=Element
+\end{itemize}
+Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref
 
-\subsection{URDF-Unified Robot Description Format}
-Das \textit{URDF}"=Format wird standardmässig in \textit{ROS} verwendet, für die Beschreibung von Systemen.
-Es kann nur kinematische Strukturen abbilden die einen Baum"=Form haben.
-Somit können keine geschlossenen kinematischen Ketten beschrieben werden.
-
-
-\subsection{SDF-Simulation Description Format}
-Das \textit{SDF}"=Format wird bis jetzt ausschliesslich im \textit{Gazebo} verwendet.
-Es kann kinematische Graph-Strukturen abbilden.
-Deshalb könne auch geschlossenen kinematische Ketten beschrieben werden.
 
 \subsection{Vereinfachung}
-%TODO titel
-\subsubsection{Konvertierung}
-Damit für ein System nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
-Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
-Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
-Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
-%TODO ref auf kapitel in delta
+Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die System"=Beschreibung wurde schon im Kapitel xx Konvertierung vorgestellt. %TODO ref
+Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
 
 \subsubsection{XACRO}
 \textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
@@ -117,11 +145,14 @@ Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien 
 Denn mit Hilfe der Makros können Wiederholungen vermieden werden.
 Auch kann Dank \textit{XACRO} eine XML"=Datei in mehrere Unterdateien aufgeteilt werden.
 Somit kann ein komplexes System logisch in Untersysteme aufgeteilt werden, die dann jeweils in einer eigenen XML"=Datei beschrieben werden. 
-%TODO vortiele einsezen in delta
+%TODO vorteile einsezen in delta
 Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Datei des Delta-Roboters gezeigt.
 
-\subsection{TF}
+\section{TF}
+% oder mehr so was wie: Koordinatensystem, Roboter Zustand
+% Transformation 
 joint_state_publisher erklären für was
+robot_state_publisher
 
 % erklären wie tf erzeugen tf = Transform, coordinate frame data
 verweis rviz braucht tf daten
