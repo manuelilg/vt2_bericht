@@ -13,16 +13,22 @@
 Eine Skizze des Konzeptes ist in der Abbildung %TODO ref
 zusehen.
 Die zwei Hauptkomponenten sind \textit{EEROS} und \textit{ROS}.
-\textit{EEROS} übernimmt in diesem Szenario die Aufgabe des Regelns.
+\textit{EEROS} übernimmt in diesem Szenario die Aufgabe des Reglers.
 Und \textit{ROS} die Aufgaben der Simulation und der Visualisierung.
 
 Damit \textit{EEROS} mit \textit{ROS}"=Komponenten kommunizieren kann, wurde einen \textit{ROS}"=Node ins \textit{EEROS} integriert.
 Somit hat \textit{EEROS} die Fähigkeit über das \textit{ROS}"=Kommunikationsprinzip \textit{Publish\,\&\,Subscribe} Daten auszutauschen.
 Das Konzept sieht vor das \textit{EEROS} wahlweise ein echtes oder simuliertes System regelt.
-Und in beiden Fällen können die Zustände und Regel"=Parameter durch \textit{ROS} visualisiert werden.
+Mit dem Begriff System werden in dieser Arbeit allgemein mechatronische Systeme wie zum Beispiel ein Roboter bezeichnet.
+Zu und vom System fliessen Daten wie Stell"= und Regel"=Grössen.
+Diese Daten werden einfachheitshalber Grössen genannt.
+Aus den Grössen die vom System kommen kann der Zustand vom System interpretiert werden.
+Der Zustand von einem System kann zum Beispiel die Winkel"=Position eines Motors beschreiben.
+
+Die Zustände und Grössen eines Systems werden visualisiert egal ob an einem realen oder ein simulierten System gearbeitet wird. %TODO umformulieren
 
 Für die Simulation von Systemen wird \textit{Gazebo} eingesetzt.
-Die Darstellung von den System Zuständen wird mit \textit{rviz} realisiert. Und für die Darstellung von Daten wie der Regel"=Parameter in Graph"=Plots wird \textit{rqt} eingesetzt.
+Die Darstellung von den System Zuständen wird mit \textit{rviz} realisiert. Und für die Darstellung von den Grössen in Graph"=Plots wird \textit{rqt} eingesetzt.
 
 %Das Konzept kann in mehrere Bereich aufgeteilt werden.
 %Die Simulation des Systems, die Visualisierung des Zustandes vom System und der KontrollerEEROS.
