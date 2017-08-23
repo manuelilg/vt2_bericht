@@ -13,8 +13,14 @@
 \item ros-ökosystem: gazebo, rviz, rqt
 \end{itemize}
 
+In dieser Arbeit wird EEROS als externe Software verwendet.
+Jedoch soll hier angemerkt werden dass jede Software verwendet werden kann, insofern die ROS-Library in diese integriert werden kann.
+Ein Beispiele wie diese Integration aussehen kann ist in der Arbeit %TODO ref arbeit mäsi zusehen / oder auf repo 
+
+
 \section{ROS}
 \textit{ROS} (Robot Operating System) ist ein Software"=Framework für die Programmierung von Roboteranwendungen.
+Mit \textit{ROS} werden vor allem übergeordnete Aufgaben in einer Roboteranwendung umgesetzt.
 Es besteht aus einem Set von Softwarebibliotheken und Werkzeugen.
 Die einzelnen Teile von \textit{ROS} sind organisiert als Packages.
 Das \textit{ROS}"=Netzwerk besteht aus Knoten die über Peer"=to"=Peer miteinander kommunizieren.
@@ -33,23 +39,25 @@ Gute Quellen für dies sind:
 \subsection{ROS"=Komponenten}
 In diesem Kapitel werden die wichtigsten \textit{ROS}"=Komponenten aufgelistet.
 Es werden nur die Begriffe der Komponenten kurz vorgestellt.
-Damit sollen 
+Die Begriffe werden bewusst nicht ins Deutsche übersetzt damit die Begriffe geläufig sind wenn man die offizielle \textit{ROS}"=Dokumentation konsultiert.
 
-%wiso englisch
-
-\subsubsection{Master}
-
-\subsubsection{Parameter"=Server}
+\paragraph*{Master} \mbox{}\\
+Der Master ist die Kernkomponente vom \textit{ROS}"=Netzwerk.
+Er verwaltet die Kommunikation zwischen den Knoten (Nodes).
+Das Kommunikationsverfahren das verwendet wird ist das Publish\,\&\,Subscribe Prinzip. %TODO ref https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
 
 \subsubsection{Nodes}
+Knoten sind Prozesse in denen Berechnungen oder Treiber ausgeführt werden. 
+Somit kann ein Knoten eine Datenverarbeitung, ein Aktor oder ein Sensor darstellen.  
 
 \subsubsection{Messages}
+Die Messages sind eine Konvention für den Austausch von Daten.
+Darum gibt es für die unterschiedlichen Anforderungen der Kommunikation, verschiedene Nachricht"=Typen.
 
 \subsubsection{Topics}
+Der Nachrichtenaustausch mit dem Publish\,\&\,Subscribe Mechanismus ist anonym.
+Darum werden die Nachrichten unter einem Thema (Topic) ausgetauscht.
 
 \section{EEROS}
-kurze Einführung, Verweis
-
-In dieser Arbeit wird EEROS als externe Software verwendet.
-Jedoch soll hier angemerkt werden dass jede Software verwendet werden kann, insofern die ROS-Library in diese integriert werden kann.
-Ein Beispiele wie diese Integration aussehen kann ist in der Arbeit %TODO ref arbeit mäsi zusehen / oder auf repo 
+\textit{EEROS} ist eine Roboter"=Framework mit Fokus auf die Ausführung von Echtzeit"=Aufgaben.
+Somit ist es geeignet für die Umsetzung von untergeordneten Aufgaben in einer Roboteranwendung, wie das Regeln von einem Motor.
