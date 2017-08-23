@@ -81,8 +81,10 @@
 %\usepackage{lettrine}
 %\DeclareFixedFont{\Yinit}{U}{yinit}{m}{n}{16}
 
-% checkmarks
+% grafiken
 \usepackage{tikz}
+\usetikzlibrary{intersections,positioning, shapes.geometric}
+% checkmarks
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -173,6 +175,8 @@
 
 % Codesegmente
 \usepackage{listings}
+\usepackage{courier}
+
 \definecolor{darkblue}{rgb}{0,0,0.6}
 \definecolor{darkred}{rgb}{0.6,0,0}
 \definecolor{darkgreen}{rgb}{0,0.6,0}
@@ -181,6 +185,7 @@
 \lstset{%
   language=C,
   basicstyle=\footnotesize\ttfamily,
+  upquote=true,
   commentstyle=\itshape\color{darkgreen},
   keywordstyle=\bfseries\color{darkblue},
   stringstyle=\color{darkred},

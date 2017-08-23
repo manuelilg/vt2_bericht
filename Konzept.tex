@@ -35,6 +35,63 @@ Für das erzeugen der Plots wird das \textit{rqt} Plugin multiplot eingesetzt.
 %Das Konzept kann in mehrere Bereich aufgeteilt werden.
 %Die Simulation des Systems, die Visualisierung des Zustandes vom System und der KontrollerEEROS.
 
+\begin{tikzpicture}[scale=4]
+%	\draw (0, 0) -- (14.5, 0);
+%	\draw (0, 0) -- (0, 1.5)
+%	(0,0) rectangle ++(10,2);
+	\draw[step=0.5]
+	(0,0) grid (1.4,1.4);
+	
+	\draw[->] (0,0) -- (1.5,0) node[right] {$x$};
+	\draw[->](0,0) -- (0,1.5);
+	
+	\draw
+	(1,0) arc (0:90:1cm)
+	(3mm,0pt) arc (0:30:3mm);
+	
+	\draw 
+	(0,0) -- node[below] {blaa} (1,0);
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1,node distance=5mm]
+ \path
+ 	(8,4) node {Eingabe}
+ 	(8,3) node {$r=a$}
+ 	(8,0) node {Ausgabe};
+% 	
+% \node at (4,4) (eingabe) {Eingabe};
+% \node at (4,3) (blaa) {$r=a$};
+ 	
+ \node (in) {Eingabe};
+ \node[below=of in] (div) {$r=a$};
+ 
+ \path[->]
+ 	(in) edge (div);
+ \draw[->]
+ 	(div) -- ++(1,0) |- (in);
+
+\end{tikzpicture}
+
+%\centering
+\begin{tikzpicture}[
+		scale=1,
+		%every node/.style={transform shape},
+		eeros/.style 2 args={draw, rectangle, minimum height=#1, minimum width=#2}]
+	\node (eeros) [eeros={1}{1}] {EEROS};
+	
+\end{tikzpicture}
+
+\begin{lstlisting}[language=Java]
+public class Hello {
+	public static void main(String args[]) {
+		System.out.println("hello world");
+	}
+}
+\end{lstlisting}
+
+\framebox{}
+
 \section{Gazebo}
 \begin{itemize}
 \item festkörper simulation
