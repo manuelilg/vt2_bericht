@@ -107,19 +107,30 @@ Um \textit{Gazebo} mit Funktionen zu erweitern können Plugins verwendet werden.
 Dabei kann man schon fertige Plugins verwenden oder selber eines programmieren. %TODO ref auf fertige plugins
 
 %\section{Darstellung}
-\section{rviz}
-\begin{itemize}
-\item darstellen von System und deren Zuständen
-\item benötigt urdf-file für Darstellung
-\end{itemize}
-Das Visualisierungs"=Tool \textit{rviz} ist für die Darstellung von Systemen geeignet.
+\section{RViz}
+%\begin{itemize}
+%\item darstellen von System und deren Zuständen
+%\item benötigt urdf-file für Darstellung
+%\end{itemize}
+Das Visualisierungs"=Tool \textit{RViz} ist für die Darstellung von Systemen geeignet.
 Dabei können z.B. Zustände von einem Roboter visualisiert werden oder Sensor"=Daten wie von einer 3D"=Kamera.
 
-Ein System besteht aus mehren Körpern.
-Um sie darzustellen braucht es unter anderem Informationen über das Aussehen und Form dieser.
-Diese Informationen müssen dem \textit{rviz} über eine \textit{urdf}"=File zur Verfügung gestellt werden. %TODO ref urdf
-Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper noch die Position und Orientierung von diesem im Raum.
-Deshalb müssen dem \textit{rviz} stetig Koordinaten-Daten für jeden Körper übermittelt werden. %TODO ref tf
+Damit \text{RViz} eine System wie ein Roboter darstellen kann braucht es folgende Informationen:
+\begin{itemize}
+\item Aussehen jedes Körpers im System, wie Form und Farbe 
+\item laufend für jeden Körper Position und Orientierung
+\end{itemize}
+
+Die Informationen über das Aussehen müssen dem \textit{RViz} über eine \textit{urdf}"=File zur Verfügung gestellt werden. %TODO ref urdf
+%Und mit einem Set von Koordinatensystemen werden dem \text{RViz} Position und Orientierung für jeden Körper mitgeteilt. 
+%Genauer wird im Abschnitt xx auf die Koordinatensysteme eingegangen. %TODO ref tf
+Und aus den Transformations"=Daten die \textit{RViz} laufend erhält, kann es die Position und Orientierung jedes Körpers berechnen. %TODO ref transf
+%Und Informationen über die Position und Orientierung jedes Körpers kann \textit{RViz} über Transformationen.
+%Eine Transformationen beschreiben wie ein Koordinatensystem relative zu einem anderen steht.   
+
+
+%Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper noch die Position und Orientierung von diesem im Raum.
+%Deshalb müssen dem \textit{rviz} stetig Koordinaten-Daten für jeden Körper übermittelt werden. %TODO ref tf
 
 
 \section{rqt}
@@ -134,12 +145,11 @@ Für die Darstellung von den zeit veränderlichen Grössen des Systems wird das 
 %hat für viele gängige ros-cli-tools ein rqt-plugin
 
 
-\section{System-Beschreibung}
+\section{System-Beschreibung} % Roboter"=Modell
 %TODO titel mehrdeutig mehr so was wie: Datei-formate für beschreibung von Systemen, repräsentation, abbildung, Format für repräsentation von Systemen
 
 Die Programme \textit{Gazebo} und \textit{rviz} verwenden für die Beschreibung der Systeme unterschiedliche Datei"=Formate.
-In diesem Abschnitt werden diese beiden XML"=Formate kurz vorgestellt.
-Sie können beide kinematische Strukturen repräsentieren.
+Beide sind im XML"=Stil gehalten und repräsentieren kinematische Strukturen.
 Diese Strukturen werden als Modell bezeichnet.
 %Der Aufbau eines Modells wird im Kapitel xx erleutert. %TODO ref
 
@@ -196,7 +206,7 @@ Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref
 Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die System"=Beschreibung wurde schon im Kapitel xx Konvertierung vorgestellt. %TODO ref
 Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
 
-\subsubsection{XACRO}
+\subsubsection{XACRO} %TODO Scriptsprache
 \textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
 Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien erstellt werden.
 Denn mit Hilfe der Makros können Wiederholungen vermieden werden.
@@ -205,7 +215,39 @@ Somit kann ein komplexes System logisch in Untersysteme aufgeteilt werden, die d
 %TODO vorteile einsezen in delta
 Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Datei des Delta-Roboters gezeigt.
 
-\section{TF}
+\section{Transformationen} % Bezugssystem
+Eine Transformation beschreibt wie ein Koordinatensystem relative zu einem anderen steht.
+Koordinatensysteme beschreiben eine Position und Orientierung im Raum für zum Beispiel einen Körper.
+%Die Position und Orientierung eines Körpers im Raum kann mit einem Koordinatensystem beschrieben werde.
+Aufbau einer Transformation:
+\begin{itemize}
+\item Eltern"=Koordinatensystem
+\item Kind"=Koordinatensystem
+\item Translation
+\item Rotation
+\end{itemize}
+
+Durch die Eltern/Kind Relation bilden die Transformationen eine Baumstruktur.
+Das Wurzel"=Element dieses Baumes ist meistens das Welt"=Koordinatensystem.
+
+%In \textit{ROS} werden aber nicht \textsc{"}absolute\textsc{"} Koordinatensysteme verwendet, sondern Transformationen zwischen den Koordinatensystemen.
+%Somit sind die Position und Orientierung eines Koordinatensystems immer in Bezug  zu einem  
+
+Zur Veranschaulichung ein Beispiel:
+% Bild rrbot daneben bild mit tf graph
+
+
+Man berechnet das Koordinatensystem des zweiten Körpers in Bezug zu der Welt folgend:
+
+
+\subsection{robot\underline{ }state\underline{ }publisher}
+Der \textit{robot\underline{ }state\underline{ }publisher} berechnet für jedes Gelenk die Transformationen und gibt sie aus.
+Als Eingabe braucht er zum eine die System"=Beschreibung als \textit{urdf}"=Datei und zum anderen laufend die Winkel"=Positionen zu jedem Gelenk.
+
+
+%aus den Informationen über den Zustand eines Systems die Transformation 
+
+
 % oder mehr so was wie: Koordinatensystem, Roboter Zustand
 % Transformation 
 joint state publisher erklären für was
