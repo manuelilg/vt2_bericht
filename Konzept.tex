@@ -1,13 +1,13 @@
 \chapter{Konzept}
 % idee vorstellen 
 \subsubsection*{Stichworte}
-\begin{itemize}
-\item Übersicht von Konzept mit Graphik
-\item 3 Bereiche aufzeigen: EEROS, Gazebo, rqt \& rviz
-\item Schnittstellen zu einander
-\item Verweis zu Mäsis Arbeit
-\item urdf, sdf vorstellen und erklären, hier??? oder in Motor
-\end{itemize}
+%\begin{itemize}
+%\item Übersicht von Konzept mit Graphik
+%\item 3 Bereiche aufzeigen: EEROS, Gazebo, RQt \& rviz
+%\item Schnittstellen zu einander
+%\item Verweis zu Mäsis Arbeit
+%\item URDF, SDF vorstellen und erklären, hier??? oder in Motor
+%\end{itemize}
 %TODO erwähnen systemen -> ist eine mechatronisches system gemein aus Aktor,...  -> roboter
 
 Eine Skizze des Konzeptes ist in der Abbildung %TODO ref
@@ -16,92 +16,114 @@ Die zwei Hauptkomponenten sind \textit{EEROS} und \textit{ROS}.
 \textit{EEROS} übernimmt in diesem Szenario die Aufgabe des Reglers.
 Und \textit{ROS} die Aufgaben der Simulation und der Visualisierung.
 
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=14.5cm]{images/Konzept.png}
+	\caption{Konzept}
+	\label{Ab:konzept}
+\end{figure}
+
 Damit \textit{EEROS} mit \textit{ROS}"=Komponenten kommunizieren kann, wurde einen \textit{ROS}"=Node ins \textit{EEROS} integriert.
+Diese Integration wird in der Arbeit xx erklärt. %TODO ref mäsis arbeit
 Somit hat \textit{EEROS} die Fähigkeit über das \textit{ROS}"=Kommunikationsprinzip \textit{Publish\,\&\,Subscribe} Daten auszutauschen.
-Das Konzept sieht vor das \textit{EEROS} wahlweise ein echtes oder simuliertes System regelt.
-Mit dem Begriff System werden in dieser Arbeit allgemein mechatronische Systeme wie zum Beispiel ein Roboter bezeichnet.
-Zu und vom System fliessen Daten wie Stell"= und Regel"=Grössen.
-Diese Daten werden einfachheitshalber Grössen genannt.
-Aus den Grössen die vom System kommen kann der Zustand vom System interpretiert werden.
-Der Zustand von einem System kann zum Beispiel die Winkel"=Position eines Motors beschreiben.
+Das Konzept sieht vor das \textit{EEROS} wahlweise einen echten oder simulierten Roboter steuert und regelt.
+%Mit dem Begriff System werden in dieser Arbeit allgemein mechatronische Systeme wie zum Beispiel ein Roboter bezeichnet.
+Der Roboter in der Skizze ist aus zwei Gliedern und einem Gelenk aufgebaut.
+Die Stellgrösse die vom \textit{EEROS} vorgegeben wird ist das Drehmoment für das Gelenk.
+Und die Regelgrösse ist die Winkelposition des Gelenks.
 
-Die Zustände und Grössen eines Systems werden visualisiert egal ob an einem realen oder ein simulierten System gearbeitet wird. %TODO umformulieren
+Die Visualisierung mit \textit{RQt} und \textit{RViz} erfolgt gleichermassen ob ein echter oder simulierter Roboter betrieben wird.
+Mit \textit{RQt} können die Grössen in Plots dargestellt werden.
+Und der Zustand des Roboters kann mit \textit{RViz} visualisiert werden.
+Da \textit{RViz} nicht direkt die Gelenkwinkel interpretieren kann müssen diese von einem \textit{ROS}"=Knoten in Koordinatensystem"=Transformationen umgerechnet werden. %TODO ref
 
-Für die Simulation von Systemen wird \textit{Gazebo} eingesetzt.
-Die Darstellung von den System Zuständen wird mit \textit{rviz} realisiert.
-Für die Visualisierung der Grössen werden Plots eingesetzt.
-Für das erzeugen der Plots wird das \textit{rqt} Plugin multiplot eingesetzt.
+%Zu und vom System fliessen Daten wie Stell"= und Regel"=Grössen.
+%Diese Daten werden einfachheitshalber Grössen genannt.
+%Aus den Grössen die vom Roboter kommen kann der Zustand vom System interpretiert werden.
+%Der Zustand von einem System kann zum Beispiel die Winkel"=Position eines Motors beschreiben.
+
+%Die Zustände und Grössen eines Systems werden visualisiert egal ob an einem realen oder ein simulierten System gearbeitet wird.
+
+%Für die Simulation von Systemen wird \textit{Gazebo} eingesetzt.
+%Die Darstellung von den System Zuständen wird mit \textit{rviz} realisiert.
+%Für die Visualisierung der Grössen werden Plots eingesetzt.
+%Für das erzeugen der Plots wird das \textit{RQt} Plugin multiplot eingesetzt.
 
 %Das Konzept kann in mehrere Bereich aufgeteilt werden.
 %Die Simulation des Systems, die Visualisierung des Zustandes vom System und der KontrollerEEROS.
 
-\begin{tikzpicture}[scale=4]
-%	\draw (0, 0) -- (14.5, 0);
-%	\draw (0, 0) -- (0, 1.5)
-%	(0,0) rectangle ++(10,2);
-	\draw[step=0.5]
-	(0,0) grid (1.4,1.4);
-	
-	\draw[->] (0,0) -- (1.5,0) node[right] {$x$};
-	\draw[->](0,0) -- (0,1.5);
-	
-	\draw
-	(1,0) arc (0:90:1cm)
-	(3mm,0pt) arc (0:30:3mm);
-	
-	\draw 
-	(0,0) -- node[below] {blaa} (1,0);
-	
-\end{tikzpicture}
 
-\begin{tikzpicture}[scale=1,node distance=5mm]
- \path
- 	(8,4) node {Eingabe}
- 	(8,3) node {$r=a$}
- 	(8,0) node {Ausgabe};
+%\begin{tikzpicture}[scale=4]
+%%	\draw (0, 0) -- (14.5, 0);
+%%	\draw (0, 0) -- (0, 1.5)
+%%	(0,0) rectangle ++(10,2);
+%	\draw[step=0.5]
+%	(0,0) grid (1.4,1.4);
+%	
+%	\draw[->] (0,0) -- (1.5,0) node[right] {$x$};
+%	\draw[->](0,0) -- (0,1.5);
+%	
+%	\draw
+%	(1,0) arc (0:90:1cm)
+%	(3mm,0pt) arc (0:30:3mm);
+%	
+%	\draw 
+%	(0,0) -- node[below] {blaa} (1,0);
+%	
+%\end{tikzpicture}
+%
+%\begin{tikzpicture}[scale=1,node distance=5mm]
+% \path
+% 	(8,4) node {Eingabe}
+% 	(8,3) node {$r=a$}
+% 	(8,0) node {Ausgabe};
+%% 	
+%% \node at (4,4) (eingabe) {Eingabe};
+%% \node at (4,3) (blaa) {$r=a$};
 % 	
-% \node at (4,4) (eingabe) {Eingabe};
-% \node at (4,3) (blaa) {$r=a$};
- 	
- \node (in) {Eingabe};
- \node[below=of in] (div) {$r=a$};
- 
- \path[->]
- 	(in) edge (div);
- \draw[->]
- 	(div) -- ++(1,0) |- (in);
-
-\end{tikzpicture}
-
-%\centering
-\begin{tikzpicture}[
-		scale=1,
-		%every node/.style={transform shape},
-		eeros/.style 2 args={draw, rectangle, minimum height=#1, minimum width=#2}]
-	\node (eeros) [eeros={1}{1}] {EEROS};
-	
-\end{tikzpicture}
-
-\begin{lstlisting}[language=Java]
-public class Hello {
-	public static void main(String args[]) {
-		System.out.println("hello world");
-	}
-}
-\end{lstlisting}
-
-\framebox{}
+% \node (in) {Eingabe};
+% \node[below=of in] (div) {$r=a$};
+% 
+% \path[->]
+% 	(in) edge (div);
+% \draw[->]
+% 	(div) -- ++(1,0) |- (in);
+%
+%\end{tikzpicture}
+%
+%%\centering
+%\begin{tikzpicture}[
+%		scale=1,
+%		%every node/.style={transform shape},
+%		eeros/.style 2 args={draw, rectangle, minimum height=#1, minimum width=#2}]
+%	\node (eeros) [eeros={1}{1}] {EEROS};
+%	
+%\end{tikzpicture}
+%
+%\begin{lstlisting}[language=Java]
+%public class Hello {
+%	public static void main(String args[]) {
+%		System.out.println("hello world");
+%	}
+%}
+%\end{lstlisting}
+%
+%\framebox{}
 
 \section{Gazebo}
-\begin{itemize}
-\item festkörper simulation
-\item kann mit selbst geschriebenen Plugins erweitert werden.
-\item benötig sdf für beschreibung des zu simulierenden systems
-\end{itemize}
+%\begin{itemize}
+%\item festkörper simulation
+%\item kann mit selbst geschriebenen Plugins erweitert werden.
+%\item benötig SDF für beschreibung des zu simulierenden systems
+%\end{itemize}
 
-\textit{Gazebo} ist eine Simulationsumgebung für Starrkörper.
-Das zu simulierenden Systems wird mit einem \textit{sdf}"=File beschrieben. %TODO ref zu sdf
-Das File ist im XML"=Format aufgebaut.
+\textit{Gazebo} ist eine Starrkörper"=Simulationsumgebung für Mehrkörper"=Systeme.
+Vom System das man simuliert möchte muss eine System"=Beschreibung in Form von einer \textit{SDF}"=Datei erstellt werden.
+\textit{Gazebo} baut dann die Simulation anhand dieser Datei auf. 
+In unserem Fall wird im \textit{SDF} das Roboter"=Modell beschrieben.
+%Die System"=Beschreibung vom System das simuliert werden
+%Das zu simulierenden Systems wird mit einem \textit{SDF}"=File beschrieben. %TODO ref zu SDF
+%Das File ist im XML"=Format aufgebaut.
 
 Um \textit{Gazebo} mit Funktionen zu erweitern können Plugins verwendet werden.
 Dabei kann man schon fertige Plugins verwenden oder selber eines programmieren. %TODO ref auf fertige plugins
@@ -110,51 +132,54 @@ Dabei kann man schon fertige Plugins verwenden oder selber eines programmieren. 
 \section{RViz}
 %\begin{itemize}
 %\item darstellen von System und deren Zuständen
-%\item benötigt urdf-file für Darstellung
+%\item benötigt URDF-file für Darstellung
 %\end{itemize}
-Das Visualisierungs"=Tool \textit{RViz} ist für die Darstellung von Systemen geeignet.
-Dabei können z.B. Zustände von einem Roboter visualisiert werden oder Sensor"=Daten wie von einer 3D"=Kamera.
+Mit dem Visualisierungs"=Tool \textit{RViz} kann der Zustand vom Roboter visualisiert werden.
+Der Zustand ist die momentane Stellung von den Gelenken des Roboters, oder einfacher ausgedrückt die Pose vom Roboter.
+Auch wird \textit{RViz} eingesetzt für die Visualisierung von anderen Daten wie z.B. die Sensor"=Daten von einer 3D"=Kamera
 
-Damit \text{RViz} eine System wie ein Roboter darstellen kann braucht es folgende Informationen:
+Damit \text{RViz} den Zustand vom Roboter darstellen kann braucht es folgende Informationen:
 \begin{itemize}
-\item Aussehen jedes Körpers im System, wie Form und Farbe 
-\item laufend für jeden Körper Position und Orientierung
+\item Aussehen jedes Glieds des Roboters, wie Form und Farbe 
+\item laufend für jedes Glied: Position und Orientierung
 \end{itemize}
 
-Die Informationen über das Aussehen müssen dem \textit{RViz} über eine \textit{urdf}"=File zur Verfügung gestellt werden. %TODO ref urdf
+Mit einer \textit{URDF}"=Datei müssen dem \textit{RViz} die Information über das Aussehen zur Verfügung gestellt werden. %TODO ref URDF
+\textit{URDF} ist ein Format für die Modell"=Beschreibung eines Roboters.
 %Und mit einem Set von Koordinatensystemen werden dem \text{RViz} Position und Orientierung für jeden Körper mitgeteilt. 
 %Genauer wird im Abschnitt xx auf die Koordinatensysteme eingegangen. %TODO ref tf
-Und aus den Transformations"=Daten die \textit{RViz} laufend erhält, kann es die Position und Orientierung jedes Körpers berechnen. %TODO ref transf
+
+Und die Informationen über Position und Orientierung jedes Glieds kann \textit{RViz} den Transformations"=Daten die es laufend erhält interpretieren. %TODO ref transf
+%Und aus den Transformations"=Daten die \textit{RViz} laufend erhält, kann es die Position und Orientierung jedes Körpers berechnen.
 %Und Informationen über die Position und Orientierung jedes Körpers kann \textit{RViz} über Transformationen.
 %Eine Transformationen beschreiben wie ein Koordinatensystem relative zu einem anderen steht.   
-
 
 %Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper noch die Position und Orientierung von diesem im Raum.
 %Deshalb müssen dem \textit{rviz} stetig Koordinaten-Daten für jeden Körper übermittelt werden. %TODO ref tf
 
 
-\section{rqt}
-\textit{rqt} ist Framework für die GUI Entwicklung in \textit{ROS}.
+\section{RQt}
+\textit{RQt} ist Framework für die GUI Entwicklung in \textit{ROS}.
 Diese GUI's werden als Plugins implementiert.
-Somit können mehre GUI's in einem \textit{rqt}"=Fenster verwendet werden.
+Somit können mehre GUI's in einem \textit{RQt}"=Fenster verwendet werden.
 Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins. %TODO ref plugin list
 Es können aber auch selbst programmiert Plugins verwendet werden. 
-Für die Darstellung von den zeit veränderlichen Grössen des Systems wird das Plugin \textit{multiplot} eingesetzt. %TODO ref und bild?
+Für die Visualisierung von zeitabhängigen Grössen wird das \textit{RQt}"=Plugin \textit{multiplot} eingesetzt. %TODO ref und bild?
 
 %gui-tool, für das plugins vorhanden sind oder selber geschrieben werden können
-%hat für viele gängige ros-cli-tools ein rqt-plugin
+%hat für viele gängige ros-cli-tools ein RQt-plugin
 
 
-\section{System-Beschreibung} % Roboter"=Modell
+\section{Roboter-Modell} % Roboter"=Modell
 %TODO titel mehrdeutig mehr so was wie: Datei-formate für beschreibung von Systemen, repräsentation, abbildung, Format für repräsentation von Systemen
 
-Die Programme \textit{Gazebo} und \textit{rviz} verwenden für die Beschreibung der Systeme unterschiedliche Datei"=Formate.
+Die Programme \textit{Gazebo} und \textit{rviz} verwenden für zwei unterschiedliche Datei"=Formate für die Modell"=Beschreibung.
 Beide sind im XML"=Stil gehalten und repräsentieren kinematische Strukturen.
-Diese Strukturen werden als Modell bezeichnet.
-%Der Aufbau eines Modells wird im Kapitel xx erleutert. %TODO ref
+Diese Strukturen sind aus Gelidern (Links) und Gelenken (Joints) aufgebaut.
+%Der Aufbau eines Modells wird im Kapitel xx erleutert.
 
 \subsection{URDF-Unified Robot Description Format}
-Das \textit{URDF}"=Format wird standardmässig in \textit{ROS} verwendet, für die Beschreibung von Systemen.
+Das \textit{URDF}"=Format wird standardmässig in \textit{ROS} verwendet, für die Beschreibung von Roboteren.
 Es kann nur kinematische Strukturen abbilden die einen Baum"=Form haben.
 Somit können keine geschlossenen kinematischen Ketten beschrieben werden.
 Im Kapitel xx wird beschrieben wie ein \textit{URDF}"=Model aufgebaut werden kann. %TODO ref
@@ -165,41 +190,49 @@ Es kann kinematische Graph-Strukturen abbilden.
 Deshalb könne auch geschlossenen kinematische Ketten beschrieben werden.
 
 \subsubsection{Konvertierung}
-Damit für ein System nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
+Damit für ein Roboter nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
 Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
 Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
 Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
-In welchen Fällen es solche spezial Elemente braucht und wie sie eingesetzt werden wird im Kapitel xx behandelt. %TODO ref 
+In welchen Fällen es solche spezial Elemente braucht und wie sie eingesetzt werden wird im Kapitel xx gezeigt. %TODO ref 
 %TODO ref auf kapitel in delta/motor
 
 
 \subsection{Modell}
-Ein Modell besteht aus den zwei Elementen Glied (Link) und Gelenk (Joint).
+Ein Modell besteht aus den zwei Teilen: Glied (Link) und Gelenk (Joint).
 Für jedes gib es ein entsprechendes XML"=Element.
 Die Beziehung zwischen den beiden Komponenten ist in der Abbildung xx zusehen. %TODO ref
+Speziell zu beachten ist das die Abstände zwischen den Gelenken nicht vom Link"=Element sondern vom Joint"=Element definiert wird.
+Somit wird die Kinematische Struktur des Roboters nur über die Joint"=Elemente beschrieben.
+Auch ist das Koordinatensystem vom Gelenk gleichzeitig der Ursprung des Koordinatensystems vom Kind"=Glied des jeweiligen Gelenks. 
+
 %bilder -> https://ni.www.techfak.uni-bielefeld.de/files/URDF-XACRO.pdf
 
 % woh? erwähnen notation rpy -> ypr -> x-achse im = rotations achse 
 
 \subsubsection*{Link}
-Das Link"=Element beschreibt einen einzelne starr Körper in einem System.
-Die Beschreibung besteht aus:
+Das Link"=Element beschreibt ein einzelnes Glied vom Roboter.
+Folgende Informationen sind als Sub"=Elementen enthalten: 
 \begin{itemize}
 \item Massenträgheit
 \item Geometrie und Material für Aussehen
 \item Geometrie für Kollisionsberechnung
 \end{itemize}
-In der Auflistung xx ist zusehen wie ein Link"=Element aufgebaut ist. %TODO ref
+Für jedes dieser Aufgelisteten Sub"=Element muss der Ursprung bezüglich des Link"=Koordinatensystem angegeben werden.
+Wie die verschiedenen Sub"=Elemente in Verbindung stehen ist in der Abbildung xx dargestellt. %TODO ref
+%In der Auflistung xx ist zusehen wie ein Link"=Element aufgebaut ist. %TODO ref
 
 \subsubsection*{Joint}
 Mit dem Joint"=Element können Gelenke unterschiedlichster Art beschrieben werden.
-Die Beschreibung besteht aus:
+Folgende Informationen braucht es zur Beschreibung eines Gelenks:
 \begin{itemize}
 \item Gelenk"=Type
+\item Gelenk"=Ursprung
 \item Eltern Link"=Element
 \item Kind Link"=Element
 \end{itemize}
-Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref
+Die Beziehung dieser Angaben  zueinander ist in Abbildung xx dargestellt.
+%Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref
 
 
 \subsection{Vereinfachung}
@@ -217,7 +250,7 @@ Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Date
 
 \section{Transformationen} % Bezugssystem
 Eine Transformation beschreibt wie ein Koordinatensystem relative zu einem anderen steht.
-Koordinatensysteme beschreiben eine Position und Orientierung im Raum für zum Beispiel einen Körper.
+Koordinatensysteme beschreiben eine Position und Orientierung im Raum für zum Beispiel ein Glied.
 %Die Position und Orientierung eines Körpers im Raum kann mit einem Koordinatensystem beschrieben werde.
 Aufbau einer Transformation:
 \begin{itemize}
@@ -237,12 +270,17 @@ Zur Veranschaulichung ein Beispiel:
 % Bild rrbot daneben bild mit tf graph
 
 
-Man berechnet das Koordinatensystem des zweiten Körpers in Bezug zu der Welt folgend:
+Man berechnet das Koordinatensystem des grünen Gliedes in Bezug zu der Welt wie folgt:
 
 
-\subsection{robot\underline{ }state\underline{ }publisher}
-Der \textit{robot\underline{ }state\underline{ }publisher} berechnet für jedes Gelenk die Transformationen und gibt sie aus.
-Als Eingabe braucht er zum eine die System"=Beschreibung als \textit{urdf}"=Datei und zum anderen laufend die Winkel"=Positionen zu jedem Gelenk.
+\subsection{Umrechnung Gelenkwinkel zu Transformationen}
+Für die Umrechnung von den Winkelpositionen der Gelenke zu den Koordinaten"=Transformationen gibt es in \textit{ROS} der \textit{robot\_state\_publisher}.
+Dieser \textit{ROS}"=Node benötigt die Beschreibung des Roboter"=Modells als \textit{URDF}.
+Er setzt dann die Gelenkwinkel im Modell ein und kann dann die einzelnen Transformationen zwischen den Gelenken ausrechnen.
+Da der Ursprung jedes Gliedes im Ursprung vom Gelenk liegt, sind die berechneten Transformationen gleichzeitig die zwischen den Gliedern.
+Mit diesen kann dann \textit{RViz} die Glieder im Raum so Positionieren, dass dann der Roboter zusehen ist.
+%Der \textit{robot\_state\_publisher} berechnet für jedes Gelenk die Transformationen und gibt sie aus.
+%Als Eingabe braucht er zum eine die System"=Beschreibung als \textit{URDF}"=Datei und zum anderen laufend die Winkel"=Positionen zu jedem Gelenk.
 
 
 %aus den Informationen über den Zustand eines Systems die Transformation 
@@ -250,11 +288,9 @@ Als Eingabe braucht er zum eine die System"=Beschreibung als \textit{urdf}"=Date
 
 % oder mehr so was wie: Koordinatensystem, Roboter Zustand
 % Transformation 
-joint state publisher erklären für was
-robot state publisher
+%joint state publisher erklären für was
+%robot state publisher
 
 % erklären wie tf erzeugen tf = Transform, coordinate frame data
-verweis rviz braucht tf daten
-
-abklären ob absolute frames oder relative/tf
+%verweis rviz braucht tf daten
 
