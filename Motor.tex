@@ -13,24 +13,24 @@
 %\end{itemize}
 
 In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie mit \textit{ROS} die Entwicklung einer \textit{EEROS} Applikation unterstützt werden kann. 
-Das System ins diesem Fallbeispiel ist eine Motor"=Baugruppe (Abbildung \ref{Ab:motor-baugruppe}).
+Das Fallbeispiel ist eine Motor"=Baugruppe (Abbildung \ref{Ab:motor-baugruppe}).
 
 Für dieses System muss im \textit{EEROS} ein Regler entwickelt werden.
-Um die Entwicklung zu unterstützen und den Regler zu testen, soll eine Simulation verwendet werden.
-Und um die Leistung des Reglers besser beurteilen zu können sollen Plots von den zeit-variablen Grössen erstellt werden.
+Um die Entwicklung zu unterstützen und den Regler zu testen, wird eine Simulation erstellt.
+Und um die Leistung des Reglers besser beurteilen zu können werden Stell"= und Regel"=Grössen in Plots dargestellt.
 
 %Darum braucht es eine Simulation der Motor"=Baugruppe mit der der Regler getestet werden kann.
 %Und auch eine Visualisierung mit der das Verhalten des Regler in einem Plot dargestellt werden kann.
 
 %In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie eine Simulation in Gazebo erstellt wird.
-Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es braucht um eine Simulation und die Visualisierungen zu erstellen.
+Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es braucht für das erstellen von einer Simulation und Visualisierungen.
 %Ein Motor-Baugruppe (Abbildung \ref{Ab:motor-baugruppe}) soll als einfache Beispiel dienen.
 
 
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=14.5cm]{images/motor_baugruppe.png} %TODO anpassen
-	\caption{Motor-Baugruppe}
+	\caption{schematische Darstellung von Motor-Baugruppe}
 	\label{Ab:motor-baugruppe}
 \end{figure}
 
@@ -42,7 +42,7 @@ Der lineare Dämpfer ist realisiert durch einen zweiten kurzgeschlossenen Motor.
 Die Parameter für Simulations"=Model konnten grössten teils aus den Datenblättern der jeweiligen Komponenten entnommen werden. %TODO ref anhang / repo
 Berechnung dämpfung
 Für Parameter die nicht im Datenblatt stehen oder nicht genügend Informationen für eine Berechnung vorhanden ist, wurden geschätzt.
-Jedoch haben die geschätzten Parameter in dieser Simulation keinen nennenswerten Einfluss.
+Jedoch haben die geschätzten Parameter in diesem Fallbeispiel keinen nennenswerten Einfluss auf die Simulation.
 %Somit haben wir folgende Werte die für die physikalische Beschreibung des Modells.
 %Für jeden Link müssen immer die Masse und der Trägheits-tensor definiter sein. Dabei darf die Masse nicht 0 sein und %TODO abklären inertia = 0 
 
@@ -52,19 +52,42 @@ Auflistung von Parametern
 
 
 
+\section{Modell}
+Für die Motorbaugruppe wurde eine Modell"=Beschreibung im \textit{URDF}"=Format erstellt.
+Die Kinematische Struktur des Modells ist in der Abbildung xx dargestellt.
+Zu sehen ist das der Dämpfer noch nicht mit dem Schwungrad verbunden ist, dieser Umstand wird im Kapitel xx erläutert. %TODO ref
 
 
-\section{URDF}
-nur Beispiel hier vom Link Dämpfer und vom joint Dämpfer Achse
+Die komplette Datei ist im Repositiory:motor\_sim abgelegt.
 
-erwähnen es könnten Vereinfachungen vom Model gemacht werden
-jedoch hier bewusst nicht gemacht um Spezialfälle zu zeigen
-
-bild tree structure
-
-bild kin close
+%TODO ref auf joint, link
 
 \subsection{Kinematische Kette schliessen}
+Da das \textit{URDF}="Format kann keine geschlossenen kinematischen Strukturen abbilden.
+Dieser Mangel kann aber behoben werden mit: einem \textit{SDF} Eintrag im \textit{URDF} und mit dem \textit{URDF}"=Spezial"=Element \textsc{"}Mimic\textsc{"}.
+
+\subsubsection{SDF"=Joint}
+Die in diesem Abschnitt erklärte Anpassung wird benötigt damit in der Simulation das Schwungrad und der Dämpfer miteinander gekoppelt sind.
+
+Im \textit{URDF} können Informationen hinterlegt werden, die nur\textit{Gazebo} interpretiert.
+Dafür müssen die Informationen mit einem XML"=Element \textsc{"}gazebo\textsc{"} umschlossen werden.
+
+Wenn man jetzt ein Joint"=Element im \textit{SDF}"=Format einsetzt kann man die kinematische Struktur schliessen.
+Denn die {URDF}"=Datei wird bevor es ins \textit{Gazebo} geladen wird ins \textit{SDF}"=Format konvertiert.
+Und während der Konvertierung werden die Zeilen die sich im XML"=Element \textsc{"}gazebo\textsc{"} befinden einfach ins \textit{SDF} übernommen.
+
+Wie der Eintrag für die Motor"=Baugruppe lauten muss, ist in Auflistung xx gezeigt.
+
+\subsubsection{Mimic}
+Der \textit{ROS}"=Knoten \textit{robot\_state\_publisher} berechnet die Transformations"=Daten für die Darstellung der Körper im \textit{RViz}.
+Dafür braucht er alle Gelenkwinkel.
+Das Modell vom \textit{URDF} hat zwei Gelenke aber das in der Simulation nur eines.
+Da in der Simulation die beiden Gelenke verbunden wurden.
+
+
+Darum muss der \textit{ROS}"=Knoten \textit{joint\_state\_publisher} in  werden.
+
+
 % gazebo joint
 
 % mimic wird nur vom ROS-Node Joint_state_publisher umgesetzt keine einfluss in gazebo
@@ -101,5 +124,5 @@ achtung ist eine eigenständiger Knoten
 \section{rqt}
 keine speziellen anpassungen an urdf 
 
-
+\section{Starten}
 
