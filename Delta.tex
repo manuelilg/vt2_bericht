@@ -1,6 +1,70 @@
-\chapter{Delta}
+\chapter{EEDURO-Delta-Roboter}
 
-%TODO Anhand alle Datenblätter für Modell
+%TODO Anhang alle Datenblätter für Modell
+
+In diesem Kapitel wird das zweite Fallbeispiel mit dem EEDURO-Delta-Roboter vorgestellt.
+Der EEDURO-Delta ist ein kleiner Delta-Roboter, der für Schulungszwecke gedacht ist.
+Die Modell-Beschreibung des Roboters ist im \textit{URDF}"=Format gehalten.
+Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO} eingesetzt worden. %TODO ref
+
+
+Aufbau Roboter in mehrere Glider
+
+\section{Model}
+Das Modell des Delta-Roboter kann grob in drei Teile aufgeteilt werden:
+\begin{itemize}
+\item Rahmen (base)
+\item 3 gleiche Arme (arm 1-3)
+\item Werkzeug (tool)
+\end{itemize}
+
+Der Arm selber besteht aus einem Oberarm auch Link 1 genannt und aus einem Unterarm.
+Der Unterarm selber besteht selber wider aus:
+\begin{itemize}
+\item Doppelgabel (Link 2)
+\item 2 Stangen (Link 3.1 und Link 3.2)
+\item 2.Doppelgabel (Link 4)
+\end{itemize}
+
+Wie beim Motor muss die kinematisch Kette geschlossen werden mit dem \textit{SDF}"=Joint Element.
+
+
+\subsection{Berechnung Masse und Rotationsträgheit}
+Für jedes Glied musste die Masse und Rotationsträgheit berechnet werden, damit das Modell des Roboters sich in der Simulation wie der reale Roboter verhält.
+Die Glieder bestehen jedoch aus mehreren Bauteilen.
+Dieser Umstand verkompliziert die Berechnung sehr.
+Auch erschwerend kam hinzu das die CAD"=Daten nur im \textit{STEP}"=Austauschformat vorliegend waren.
+
+Das führt zu folgendem Arbeitsablauf:
+\begin{itemize}
+\item für jedes Glied/Baugruppe eine CAD"=Datei erstellen
+\item für jede CAD"=Datei:
+\begin{itemize}
+\item für jedes Bauteil folgende Daten exportieren
+\begin{itemize}
+\item Volumen von Körper
+\item Schwerpunkt von Körper
+\item Rotationsträgheit"=Tensor von Volumen
+\end{itemize}
+\item exportierte Daten in Matlab eintragen
+\item für jedes Bauteil Dichte in Matlab hinterlegen
+\item für jedes Bauteil mit Dichte: Masse und Rotationsträgheit ausrechnen  
+\end{itemize}
+\item Schwerpunkt und Masse von Baugruppe bestimmen
+\item Rotationsträgheit von Baugruppe ausrechnen (Steinerscher Satz für jedes Bauteil anwenden)
+\end{itemize}
+
+Die CAD"=Daten und Matlab"=Dateien sind im Repository xx zufinden.
+
+
+\section{EEDURO-Delta Joint State Publisher}
+Wie schon im mehrmals erwähnt braucht %TODO aus anderem Bericht nehmen
+
+
+
+
+Somit gibt es folgenden Prozess Graph.
+
 
 
 \subsection{Vereinfachung}
@@ -15,3 +79,7 @@ Auch kann Dank \textit{XACRO} eine XML"=Datei in mehrere Unterdateien aufgeteilt
 Somit kann ein komplexes System logisch in Untersysteme aufgeteilt werden, die dann jeweils in einer eigenen XML"=Datei beschrieben werden. 
 %TODO vorteile einsezen in delta
 Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Datei des Delta-Roboters gezeigt.
+
+
+\section{Installation und Ausführung}
+Verweis auf Repository readme

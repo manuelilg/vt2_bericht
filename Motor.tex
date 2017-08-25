@@ -49,14 +49,42 @@ Jedoch haben die geschätzten Parameter in diesem Fallbeispiel keinen nennenswer
 Auflistung von Parametern
 
 
-
-
-
 \section{Modell}
 Für die Motorbaugruppe wurde eine Modell"=Beschreibung im \textit{URDF}"=Format erstellt.
 Die Kinematische Struktur des Modells ist in der Abbildung xx dargestellt.
 Zu sehen ist das der Dämpfer noch nicht mit dem Schwungrad verbunden ist, dieser Umstand wird im Kapitel xx erläutert. %TODO ref
 
+\begin{figure}[ht!]
+	\centering
+\begin{tikzpicture}[scale=1,node distance=10mm,
+	link/.style={rectangle, draw=black, thick, inner sep=7},
+	joint/.style={ellipse, draw=blue, thick},
+	>=latex]
+ 	
+ \node[link] (base) {base\_link};
+ \node[joint, above right=of base, xshift=70] (mAxis) {motor\_axis};
+ \node[joint, above left=of base, xshift=-70, yshift=-3] (dAxis) {damper\_axis};
+ \node[link, above=of mAxis] (motor) {motor};
+ \node[link, above=of dAxis] (damper) {damper};
+ \node[joint, left=of motor] (coupling) {coupling};
+ \node[link, left=of coupling] (flywheel) {flywheel};
+ 
+ \path[->, thick, out=0, in=-130]
+ 	(base) edge (mAxis);
+ \path[->, thick]	
+ 	(mAxis) edge (motor)
+ 	(motor) edge (coupling)
+ 	(coupling) edge (flywheel);
+ 	
+ \path[->, thick, out=180, in=-30]
+ 	(base) edge (dAxis);
+ \path[->, thick]
+ 	(dAxis) edge (damper);
+
+\end{tikzpicture}
+	\caption{kinematische Struktur Motor}
+	\label{Ab:motor-struktur}
+\end{figure}
 
 Die komplette Datei ist im Repositiory:motor\_sim abgelegt.
 
@@ -84,20 +112,33 @@ Dafür braucht er alle Gelenkwinkel.
 Das Modell vom \textit{URDF} hat zwei Gelenke aber das in der Simulation nur eines.
 Da in der Simulation die beiden Gelenke verbunden wurden.
 
+Deshalb muss im Gelenk folgender Eintrag eingefügt werden: %TODO joint name
+%TODO listing mimic
 
-Darum muss der \textit{ROS}"=Knoten \textit{joint\_state\_publisher} in  werden.
+Dieser Eintrag wird vom \textit{ROS}"=Knoten \textit{joint\_state\_publisher} interpretiert.
+Er bewirkt das das Gelenk xx der gleiche Winkel hat wie das Gelenk xx.
+Somit erhalten wir vom \textit{joint\_state\_publisher} für die Eingabe von einem Gelenkwinkel xx, die Ausgabe für die Gelenkwinkel xx und xx.
 
-
-% gazebo joint
-
-% mimic wird nur vom ROS-Node Joint_state_publisher umgesetzt keine einfluss in gazebo
+Diese beiden werden dann vom \textit{robot\_state\_publisher} als Eingabe benötigt.
 
 \subsection{Gazebo Plugins}
-beschreiben für was die Plugins sind, wie sie eingesetzt werden
-joint publisher
+Damit das Modell in der Simulation mit dem \textit{ROS}"=Netzwerk interagieren kann, müssen Plugins eingesetzt werden.
 
+Mit Folgenden Zeilen werden zwei \textit{Gazebo}"=Plugins im Motor"=Modell eingebettet:
+%TODO listing
+
+Das Plugin xx publisht den Winkel von Gelenk xx.
+Achtung das Gazebo"=Plugin xx ist nicht mit dem ROS"=Knoten xx zu verwechseln.
+Es ist aus dem Package xx, ein Standard \textit{ROS}"=Package.
+
+Das zweite Plugin xx wird im nächsten Abschnitt genauer erläutert.
 
 \subsubsection{Joint Force Plugin}
+Das Plugin xx appliziert ein Drehmoment auf das Gelenk xx.
+Die Grösse des Drehmoments erhält das Plugin über das Topic xx.
+Dieses Plugin würde im Rahmen dieser Arbeit erstellt und ist im Repository xx zu finden. 
+
+
 joint force vorstellen
 
 auf tutorial verweisen
@@ -111,6 +152,9 @@ Fälle von Einsatz: 2 oder 3. auch noch
 wie benutzen 
 
 
+\section{•}
+
+
 \section{rviz}
 system wird geladen mit robot description
 braucht auch tf
@@ -118,11 +162,13 @@ braucht auch tf
 \subsection{Joint State Publisher}
 erklären für was gebraucht wird
 für mimic tag
-achtung ist eine eigenständiger Knoten
+Achtung ist eine eigenständiger Knoten
 
 
 \section{rqt}
 keine speziellen anpassungen an urdf 
 
 \section{Starten}
+einzelnen programme gazebo, rviz, rqt
+
 
