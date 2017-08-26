@@ -5,14 +5,18 @@
 In diesem Kapitel wird das zweite Fallbeispiel mit dem EEDURO-Delta-Roboter vorgestellt.
 Der EEDURO-Delta ist ein kleiner Delta-Roboter, der für Schulungszwecke gedacht ist.
 Die Modell-Beschreibung des Roboters ist im \textit{URDF}"=Format gehalten.
+Dabei wurde gleich vorgegangen wie für die Motor"=Apparatur\footnote{siehe Kapitel \ref{chap:motor}}, deshalb werden in diesem Kapitel nur noch neue Aspekte erläutert.
+%TODO bild
+
 Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} eingesetzt worden.
 
 \section{Modell}
 \label{chap:delta-modell}
-Das Modell des Delta-Roboter kann grob in drei Teile aufgeteilt werden:
+Die Modell"=Beschreibung des Deltaroboters wurde %TODO fertig machen und ref auf xacro
+Das Modell des Delta-Roboter kann grob in drei gleiche Teile aufgeteilt werden:
 \begin{itemize}
 \item Rahmen (base)
-\item drei Arme (arm 1-3)
+\item Arm (arm 1-3)
 \item Werkzeug (tool)
 \end{itemize}
 
@@ -24,8 +28,9 @@ Der Unterarm selber besteht selber wider aus:
 \item 2.Doppelgabel (Link 4)
 \end{itemize}
 
-Wie beim Motor muss die kinematisch Kette geschlossen werden mit dem \textit{SDF}"=Joint Element.
-Alle grünen Ovale sind \textit{SDF}"=Joint Elemente.
+%TODO schema roboter
+
+Wie beim Motor muss die kinematisch Kette geschlossen werden mit dem \textit{SDF}"=Joint Element (dargestellt in Abbildung \ref{Ab:delta-struktur} mit grünen Ellipsen).
 
 \begin{figure}[ht!]
 	\centering
@@ -34,8 +39,18 @@ Alle grünen Ovale sind \textit{SDF}"=Joint Elemente.
 	\label{Ab:delta-struktur}
 \end{figure}
 
+\subsection{Parameter für Modell}
+In diesem Abschnitt wird darauf eingegangen welche Parameter es braucht für die Erstellung vom Modell.
+\begin{itemize}
+\item Masse und Trägheitstensor von allen Links
+\item Längenmasse wie Abstand zwischen zwei Gelenken
+\item Geometrie von allen Links
+\end{itemize}
 
-\subsection{Berechnung Masse und Rotationsträgheit}
+Ein Teil dieser Parameter konnten aus Datenblättern gewonnen werden.
+Diese Datenblätter sind im Repository xx zu finden. %TODO ref
+
+\subsubsection{Berechnung Masse und Trägheitstensor}
 Für jedes Glied musste die Masse und Rotationsträgheit berechnet werden, damit das Modell des Roboters sich in der Simulation wie der reale Roboter verhält.
 Die Glieder bestehen jedoch aus mehreren Bauteilen.
 Dieser Umstand verkompliziert die Berechnung sehr.
@@ -62,11 +77,20 @@ Das führt zu folgendem Arbeitsablauf:
 
 Die CAD"=Daten und Matlab"=Dateien sind im Repository xx zufinden.
 
+\subsubsection{XACRO}
+\label{chap:xacro}
+\textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
+Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien erstellt werden.
+Denn mit Hilfe der Makros können Wiederholungen vermieden werden.
+Auch kann Dank \textit{XACRO} eine XML"=Datei in mehrere Unterdateien aufgeteilt werden.
+Somit kann ein komplexes System logisch in Untersysteme aufgeteilt werden, die dann jeweils in einer eigenen XML"=Datei beschrieben werden. 
+%TODO vorteile einsezen in delta
+Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Datei des Delta-Roboters gezeigt.
+
+
 
 \section{EEDURO-Delta Joint State Publisher}
 Wie schon im mehrmals erwähnt braucht %TODO aus anderem Bericht nehmen
-
-
 
 
 Somit gibt es folgenden Prozess Graph.
@@ -77,15 +101,6 @@ Somit gibt es folgenden Prozess Graph.
 Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die System"=Beschreibung wurde schon im Kapitel xx Konvertierung vorgestellt. %TODO ref
 Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
 
-\subsubsection{XACRO} %TODO Scriptsprache
-\label{chap:xacro}
-\textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
-Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien erstellt werden.
-Denn mit Hilfe der Makros können Wiederholungen vermieden werden.
-Auch kann Dank \textit{XACRO} eine XML"=Datei in mehrere Unterdateien aufgeteilt werden.
-Somit kann ein komplexes System logisch in Untersysteme aufgeteilt werden, die dann jeweils in einer eigenen XML"=Datei beschrieben werden. 
-%TODO vorteile einsezen in delta
-Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Datei des Delta-Roboters gezeigt.
 
 
 \section{Installation und Ausführung}

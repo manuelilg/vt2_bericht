@@ -1,4 +1,5 @@
-\chapter{Motor}
+\chapter{Motor"=Apparatur}
+\label{chap:motor}
 %vorstellen was in diesem Kapitel gesagt werden soll
 %oder eher erklären bsp. Regeln von Motor von EEROS
 
@@ -13,7 +14,7 @@
 %\end{itemize}
 
 In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie mit \textit{ROS} die Entwicklung einer \textit{EEROS} Applikation unterstützt werden kann. 
-Das Fallbeispiel ist eine Motor"=Baugruppe (Abbildung \ref{Ab:motor-baugruppe}).
+Das Fallbeispiel ist eine Motor"=Apparatur (Abbildung \ref{Ab:motor-baugruppe}).
 
 Für dieses System muss im \textit{EEROS} ein Regler entwickelt werden.
 Um die Entwicklung zu unterstützen und den Regler zu testen, wird eine Simulation erstellt.
@@ -31,17 +32,17 @@ Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es b
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=14.5cm]{images/motor_baugruppe.png} %TODO anpassen
-	\caption{schematische Darstellung von Motor-Baugruppe}
+	\caption{schematische Darstellung von Motor-Apparatur}
 	\label{Ab:motor-baugruppe}
 \end{figure}
 
-\section{Motor"=Baugruppe}
+\section{Motor"=Apparatur}
 Die Baugruppe besteht aus einem Motor, Schwungrad und linearen Dämpfer.
 Diese drei Komponenten sind mit einander verbunden.
 Der lineare Dämpfer ist realisiert durch einen zweiten kurzgeschlossenen Motor.
 
 Die Parameter für das Simulations"=Model konnten grössten teils aus den Datenblättern der jeweiligen Komponenten entnommen werden. 
-Die Dämpfungskonstante und die Rotationsträgheit der Schwungscheibe mussten berechnet werden.
+Die Dämpfungskonstante des Dämpfers und die Rotationsträgheit der Schwungscheibe mussten berechnet werden.
 Die Datenblätter und Berechnungen sind im Repository \textit{\textsc{"}motor\_sim\textit{"}} \footnote{\url{https://github.com/manuelilg/motor\_sim/tree/master/motor\_description/datasheets}} zu finden. 
 
 Für Parameter die nicht im Datenblatt stehen oder nicht genügend Informationen für eine Berechnung vorhanden ist, wurden geschätzt.
@@ -51,9 +52,11 @@ Jedoch haben die geschätzten Parameter in diesem Fallbeispiel keinen nennenswer
 
 
 \section{Modell}
-Für die Motorbaugruppe wurde eine Modell"=Beschreibung im \textit{URDF}"=Format erstellt.
-Die Kinematische Struktur des Modells ist in der Abbildung xx dargestellt.
-Wie zu sehen ist, das der Dämpfer noch nicht mit dem Schwungrad verbunden ist, dieser Umstand wird im Kapitel \ref{chap:kin-schliessen} erläutert.
+Für die Apparatur wurde eine Modell"=Beschreibung im \textit{URDF}"=Format erstellt.
+Die Kinematische Struktur des Modells ist in der Abbildung \ref{Ab:motor-struktur} dargestellt.
+Auffallend ist das der Dämpfer noch nicht mit dem Schwungrad gekoppelt ist.
+Warum dies so ist wird im Kapitel \ref{chap:kin-schliessen} erläutert.
+%TODO chode ausschnitt urdf
 
 \begin{figure}[ht!]
 	\centering
@@ -83,7 +86,7 @@ Wie zu sehen ist, das der Dämpfer noch nicht mit dem Schwungrad verbunden ist, 
  	(dAxis) edge (damper);
 
 \end{tikzpicture}
-	\caption{kinematische Struktur Motor}
+	\caption{kinematische Struktur Motor"=Apparatur}
 	\label{Ab:motor-struktur}
 \end{figure}
 
@@ -97,6 +100,7 @@ Das \textit{URDF}"=Format kann keine geschlossenen kinematischen Strukturen abbi
 Dieser Mangel kann aber behoben werden mit: einem \textit{SDF}"=Joint Eintrag im \textit{URDF} und mit dem \textit{URDF}"=Spezial"=Element \textsc{"}Mimic\textsc{"}.
 
 \subsubsection{SDF"=Joint}
+\label{chap:sdf-joint}
 Die in diesem Abschnitt erklärte Anpassung wird benötigt, damit in der Simulation das Schwungrad und der Dämpfer miteinander gekoppelt sind.
 
 Im \textit{URDF} können Informationen hinterlegt werden, die nur \textit{Gazebo} interpretiert.
@@ -109,10 +113,11 @@ Während der Konvertierung werden die Zeilen die sich im XML"=Element \textsc{"}
 Wie der Eintrag für die Motor"=Baugruppe lauten muss, ist in Auflistung xx gezeigt.
 
 \subsubsection{Mimic}
+\label{chap:mimic}
 Der \textit{ROS}"=Knoten \textit{robot\_state\_publisher} berechnet die Transformations"=Daten für die Darstellung der Körper im \textit{RViz}.
-Dafür braucht er alle Gelenkwinkel.
+Dafür braucht er von alle Gelenken im Modell die Gelenkwinkel.
 Das Modell vom \textit{URDF} hat zwei Gelenke aber das in der Simulation nur eines.
-Da in der Simulation die beiden Gelenke verbunden wurden.
+Da in der Simulation die beiden Gelenke fix verbunden sind (siehe Kapitel \ref{chap:sdf-joint}).
 
 Deshalb muss im Gelenk folgender Eintrag eingefügt werden: %TODO joint name
 %TODO listing mimic
@@ -122,6 +127,7 @@ Er bewirkt das das Gelenk xx der gleiche Winkel hat wie das Gelenk xx.
 Somit erhalten wir vom \textit{joint\_state\_publisher} für die Eingabe von einem Gelenkwinkel xx, die Ausgabe für die Gelenkwinkel xx und xx.
 
 Diese beiden werden dann vom \textit{robot\_state\_publisher} als Eingabe benötigt.
+In Abbildung xx ist der Informationsfluss dargestellt, der aus den oben genannten Fakten resultiert.
 
 \subsection{Gazebo Plugins}
 Damit das Modell in der Simulation mit dem \textit{ROS}"=Netzwerk interagieren kann, müssen Plugins eingesetzt werden.
@@ -129,44 +135,35 @@ Damit das Modell in der Simulation mit dem \textit{ROS}"=Netzwerk interagieren k
 Mit Folgenden Zeilen werden zwei \textit{Gazebo}"=Plugins im Motor"=Modell eingebettet:
 %TODO listing
 
+%TODO vergleiche kapitel gazebo plugins ??
 Das Plugin xx publisht den Winkel von Gelenk xx.
 Achtung das Gazebo"=Plugin xx ist nicht mit dem ROS"=Knoten xx zu verwechseln.
-Es ist aus dem Package xx, ein Standard \textit{ROS}"=Package.
+Es ist im Standard \textit{ROS"=Package} xx enthalten.
 
 Das zweite Plugin xx wird im Abschnitt \ref{chap:joint-force-plugin} genauer erläutert.
 
 \subsubsection{Joint Force Plugin}
 \label{chap:joint-force-plugin}
-Das Plugin xx appliziert ein Drehmoment auf das Gelenk xx.
-Die Grösse des Drehmoments erhält das Plugin über das Topic xx.
-Dieses Plugin würde im Rahmen dieser Arbeit erstellt und ist im Repository xx zu finden. 
+Dieses Plugin würde im Rahmen dieser Arbeit erstellt und ist im Repository xx zu finden.
+Teile von dem Plugin werden vor jedem Simulations"=Schritt aufgerufen und erfüllen somit folgende Aufgaben.
+%Das Plugin xx appliziert ein Drehmoment auf das Gelenk xx.
+%Die Grösse des Drehmoments erhält das Plugin über das Topic xx.
+\begin{itemize}
+\item Stellgrösse (Drehmoment) von \textit{EEROS} empfangen
+\item Drehmoment auf definiertes Gelenk applizieren
+\item Simulation mit \textit{EEROS} synchronisieren
+\end{itemize}
+
+\section{Installation}
 
 
-joint force vorstellen
+\section{Ausführen}
+\subsection{Gazebo}
 
-auf tutorial verweisen
-
-es wird vor jedem Simulations"=Schritt aufgerufen
-
-sync erklären
-
-Fälle von Einsatz: 2 oder 3. auch noch
-
-wie benutzen 
-
-
-\section{•}
-
-
-\section{rviz}
+\subsection{RViz}
 system wird geladen mit robot description
 braucht auch tf
-
-\subsection{Joint State Publisher}
-erklären für was gebraucht wird
-für mimic tag
-Achtung ist eine eigenständiger Knoten
-
+%TODO bild info fluss
 
 \section{rqt}
 keine speziellen anpassungen an urdf 
