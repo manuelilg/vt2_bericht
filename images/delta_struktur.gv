@@ -1,0 +1,131 @@
+digraph G {
+compound=true;
+
+node [shape=box];
+"base_link" [label="base_link"];
+"tool" [label="tool"];
+
+subgraph cluster0 {
+label = "                Arm 1";
+style = dashed;
+
+node [shape=box];
+"arm1_link2" [label="arm1_link2"];
+"arm1_link3_1" [label="arm1_link3_1"];
+"arm1_link4" [label="arm1_link4"];
+"arm1_link3_2" [label="arm1_link3_2"];
+{rank = same;
+"arm1_link1" [label="arm1_link1"];
+"arm1_motor" [label="arm1_motor"];
+}
+
+node [shape=ellipse, color=blue, fontcolor=blue];
+"arm1_joint0"
+"arm1_joint0" -> "arm1_link1"
+"arm1_link1" -> "arm1_joint1"
+"arm1_joint1" -> "arm1_link2"
+"arm1_link2" -> "arm1_joint2_1"
+"arm1_joint2_1" -> "arm1_link3_1"
+"arm1_link3_1" -> "arm1_joint3_1"
+"arm1_joint3_1" -> "arm1_link4"
+"arm1_link4" -> "arm1_joint4"
+"arm1_joint4"
+"arm1_link2" -> "arm1_joint2_2"
+"arm1_joint2_2" -> "arm1_link3_2"
+"arm1_motor_joint"
+"arm1_motor_joint" -> "arm1_motor"
+
+node [shape=ellipse, color=green, fontcolor=green];
+"arm1_motor" -> "arm1_gearbox" 
+"arm1_gearbox" -> "arm1_link1"
+"arm1_link3_2" -> "arm1_joint3_2" 
+"arm1_joint3_2" -> "arm1_link4"
+}
+
+
+subgraph cluster1 {
+label = "   Arm 2";
+style = dashed;
+
+node [shape=box];
+"arm2_link2" [label="arm2_link2"];
+"arm2_link3_1" [label="arm2_link3_1"];
+"arm2_link4" [label="arm2_link4"];
+"arm2_link3_2" [label="arm2_link3_2"];
+{rank = same;
+"arm2_link1" [label="arm2_link1"];
+"arm2_motor" [label="arm2_motor"];
+}
+node [shape=ellipse, color=blue, fontcolor=blue];
+"arm2_joint0"
+"arm2_joint0" -> "arm2_link1"
+"arm2_link1" -> "arm2_joint1"
+"arm2_joint1" -> "arm2_link2"
+"arm2_link2" -> "arm2_joint2_1"
+"arm2_joint2_1" -> "arm2_link3_1"
+"arm2_link3_1" -> "arm2_joint3_1"
+"arm2_joint3_1" -> "arm2_link4"
+"arm2_link2" -> "arm2_joint2_2"
+"arm2_joint2_2" -> "arm2_link3_2"
+"arm2_motor_joint"
+"arm2_motor_joint" -> "arm2_motor"
+
+node [shape=ellipse, color=green, fontcolor=green];
+"arm2_motor" -> "arm2_gearbox" 
+"arm2_gearbox" -> "arm2_link1"
+"arm2_link3_2" -> "arm2_joint3_2" 
+"arm2_joint3_2" -> "arm2_link4"
+"arm2_link4" -> "arm2_joint4" 
+"arm2_joint4"
+
+}
+
+subgraph cluster2 {
+label = "Arm 3";
+style = dashed;
+
+node [shape=box];
+"arm3_link2" [label="arm3_link2"];
+"arm3_link3_1" [label="arm3_link3_1"];
+"arm3_link4" [label="arm3_link4"];
+"arm3_link3_2" [label="arm3_link3_2"];
+{rank = same;
+"arm3_link1" [label="arm3_link1"];
+"arm3_motor" [label="arm3_motor"];
+}
+node [shape=ellipse, color=blue, fontcolor=blue];
+"arm3_joint0"
+"arm3_joint0" -> "arm3_link1"
+"arm3_link1" -> "arm3_joint1"
+"arm3_joint1" -> "arm3_link2"
+"arm3_link2" -> "arm3_joint2_1"
+"arm3_joint2_1" -> "arm3_link3_1"
+"arm3_link3_1" -> "arm3_joint3_1"
+"arm3_joint3_1" -> "arm3_link4"
+"arm3_link2" -> "arm3_joint2_2"
+"arm3_joint2_2" -> "arm3_link3_2"
+"arm3_motor_joint"
+"arm3_motor_joint" -> "arm3_motor"
+
+node [shape=ellipse, color=green, fontcolor=green];
+"arm3_motor" -> "arm3_gearbox" 
+"arm3_gearbox" -> "arm3_link1"
+"arm3_link3_2" -> "arm3_joint3_2" 
+"arm3_joint3_2" -> "arm3_link4"
+"arm3_link4" -> "arm3_joint4" 
+"arm3_joint4"
+
+}
+
+
+
+"base_link" -> "arm1_joint0"
+"base_link" -> "arm1_motor_joint"
+"base_link" -> "arm2_joint0"
+"base_link" -> "arm2_motor_joint"
+"base_link" -> "arm3_joint0"
+"base_link" -> "arm3_motor_joint"
+"arm3_joint4" -> "tool"
+"arm2_joint4" -> "tool"
+"arm1_joint4" -> "tool"
+}
