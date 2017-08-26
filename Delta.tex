@@ -5,16 +5,14 @@
 In diesem Kapitel wird das zweite Fallbeispiel mit dem EEDURO-Delta-Roboter vorgestellt.
 Der EEDURO-Delta ist ein kleiner Delta-Roboter, der für Schulungszwecke gedacht ist.
 Die Modell-Beschreibung des Roboters ist im \textit{URDF}"=Format gehalten.
-Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO} eingesetzt worden. %TODO ref
+Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} eingesetzt worden.
 
-
-Aufbau Roboter in mehrere Glider
-
-\section{Model}
+\section{Modell}
+\label{chap:delta-modell}
 Das Modell des Delta-Roboter kann grob in drei Teile aufgeteilt werden:
 \begin{itemize}
 \item Rahmen (base)
-\item 3 gleiche Arme (arm 1-3)
+\item drei Arme (arm 1-3)
 \item Werkzeug (tool)
 \end{itemize}
 
@@ -22,11 +20,19 @@ Der Arm selber besteht aus einem Oberarm auch Link 1 genannt und aus einem Unter
 Der Unterarm selber besteht selber wider aus:
 \begin{itemize}
 \item Doppelgabel (Link 2)
-\item 2 Stangen (Link 3.1 und Link 3.2)
+\item zwei Stangen (Link 3.1 und Link 3.2)
 \item 2.Doppelgabel (Link 4)
 \end{itemize}
 
 Wie beim Motor muss die kinematisch Kette geschlossen werden mit dem \textit{SDF}"=Joint Element.
+Alle grünen Ovale sind \textit{SDF}"=Joint Elemente.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=12cm]{images/delta_struktur.png}
+	\caption{kinematische Struktur EEDURO-Delta}
+	\label{Ab:delta-struktur}
+\end{figure}
 
 
 \subsection{Berechnung Masse und Rotationsträgheit}
@@ -72,6 +78,7 @@ Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die S
 Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
 
 \subsubsection{XACRO} %TODO Scriptsprache
+\label{chap:xacro}
 \textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
 Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien erstellt werden.
 Denn mit Hilfe der Makros können Wiederholungen vermieden werden.

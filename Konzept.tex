@@ -1,6 +1,6 @@
 \chapter{Konzept}
 % idee vorstellen 
-\subsubsection*{Stichworte}
+%s\subsubsection*{Stichworte}
 %\begin{itemize}
 %\item Übersicht von Konzept mit Graphik
 %\item 3 Bereiche aufzeigen: EEROS, Gazebo, RQt \& rviz
@@ -10,7 +10,7 @@
 %\end{itemize}
 %TODO erwähnen systemen -> ist eine mechatronisches system gemein aus Aktor,...  -> roboter
 
-Eine Skizze des Konzeptes ist in der Abbildung %TODO ref
+Eine Skizze des Konzeptes ist in der Abbildung \ref{Ab:konzept}
 zusehen.
 Die zwei Hauptkomponenten sind \textit{EEROS} und \textit{ROS}.
 \textit{EEROS} übernimmt in diesem Szenario die Aufgabe des Reglers.
@@ -26,7 +26,7 @@ Und \textit{ROS} die Aufgaben der Simulation und der Visualisierung.
 Damit \textit{EEROS} mit \textit{ROS}"=Komponenten kommunizieren kann, wurde einen \textit{ROS}"=Node ins \textit{EEROS} integriert.
 Diese Integration wird in der Arbeit xx erklärt. %TODO ref mäsis arbeit
 Somit hat \textit{EEROS} die Fähigkeit über das \textit{ROS}"=Kommunikationsprinzip \textit{Publish\,\&\,Subscribe} Daten auszutauschen.
-Das Konzept sieht vor das \textit{EEROS} wahlweise einen echten oder simulierten Roboter steuert und regelt.
+Das Konzept sieht vor, das \textit{EEROS} wahlweise einen echten oder simulierten Roboter steuert und regelt.
 %Mit dem Begriff System werden in dieser Arbeit allgemein mechatronische Systeme wie zum Beispiel ein Roboter bezeichnet.
 Der Roboter in der Skizze ist aus zwei Gliedern und einem Gelenk aufgebaut.
 Die Stellgrösse die vom \textit{EEROS} vorgegeben wird ist das Drehmoment für das Gelenk.
@@ -35,7 +35,7 @@ Und die Regelgrösse ist die Winkelposition des Gelenks.
 Die Visualisierung mit \textit{RQt} und \textit{RViz} erfolgt gleichermassen ob ein echter oder simulierter Roboter betrieben wird.
 Mit \textit{RQt} können die Grössen in Plots dargestellt werden.
 Und der Zustand des Roboters kann mit \textit{RViz} visualisiert werden.
-Da \textit{RViz} nicht direkt die Gelenkwinkel interpretieren kann müssen diese von einem \textit{ROS}"=Knoten in Koordinatensystem"=Transformationen umgerechnet werden. %TODO ref
+Da \textit{RViz} nicht direkt die Gelenkwinkel interpretieren kann müssen diese von einem \textit{ROS}"=Knoten in Koordinatensystem"=Transformationen \footnote{siehe Kapitel \ref{chap:transformationen}} umgerechnet werden.
 
 %Zu und vom System fliessen Daten wie Stell"= und Regel"=Grössen.
 %Diese Daten werden einfachheitshalber Grössen genannt.
@@ -111,6 +111,7 @@ Da \textit{RViz} nicht direkt die Gelenkwinkel interpretieren kann müssen diese
 %\framebox{}
 
 \section{Gazebo}
+\label{chap:gazebo}
 %\begin{itemize}
 %\item festkörper simulation
 %\item kann mit selbst geschriebenen Plugins erweitert werden.
@@ -118,11 +119,11 @@ Da \textit{RViz} nicht direkt die Gelenkwinkel interpretieren kann müssen diese
 %\end{itemize}
 
 \textit{Gazebo} ist eine Starrkörper"=Simulationsumgebung für Mehrkörper"=Systeme.
-Vom System das man simuliert möchte muss eine System"=Beschreibung in Form von einer \textit{SDF}"=Datei erstellt werden.
+Vom System das man simulieren möchte muss eine System"=Beschreibung in Form von einer \textit{SDF}"=Datei erstellt werden.
 \textit{Gazebo} baut dann die Simulation anhand dieser Datei auf. 
-In unserem Fall wird im \textit{SDF} das Roboter"=Modell beschrieben.
+In unserem Fall wird im \textit{SDF}\footnote{siehe Kapitel \ref{chap:sdf}} das Roboter"=Modell beschrieben.
 %Die System"=Beschreibung vom System das simuliert werden
-%Das zu simulierenden Systems wird mit einem \textit{SDF}"=File beschrieben. %TODO ref zu SDF
+%Das zu simulierenden Systems wird mit einem \textit{SDF}"=File beschrieben.
 %Das File ist im XML"=Format aufgebaut.
 
 Um \textit{Gazebo} mit Funktionen zu erweitern können Plugins verwendet werden.
@@ -130,13 +131,14 @@ Dabei kann man schon fertige Plugins verwenden oder selber eines programmieren. 
 
 %\section{Darstellung}
 \section{RViz}
+\label{chap:rviz}
 %\begin{itemize}
 %\item darstellen von System und deren Zuständen
 %\item benötigt URDF-file für Darstellung
 %\end{itemize}
 Mit dem Visualisierungs"=Tool \textit{RViz} kann der Zustand vom Roboter visualisiert werden.
-Der Zustand ist die momentane Stellung von den Gelenken des Roboters, oder einfacher ausgedrückt die Pose vom Roboter.sie
-Auch wird \textit{RViz} eingesetzt für die Visualisierung von anderen Daten wie z.B. die Sensor"=Daten von einer 3D"=Kamera
+Der Zustand ist die momentane Stellung von den Gelenken des Roboters, oder einfacher ausgedrückt die Pose vom Roboter.
+Auch wird \textit{RViz} eingesetzt für die Visualisierung von anderen Daten wie z.B. die Sensor"=Daten einer 3D"=Kamera
 
 Damit \text{RViz} den Zustand vom Roboter darstellen kann braucht es folgende Informationen:
 \begin{itemize}
@@ -144,14 +146,15 @@ Damit \text{RViz} den Zustand vom Roboter darstellen kann braucht es folgende In
 \item laufend für jedes Glied: Position und Orientierung
 \end{itemize}
 
-Mit einer \textit{URDF}"=Datei müssen dem \textit{RViz} die Information über das Aussehen zur Verfügung gestellt werden. %TODO ref URDF
+Mit einer \textit{URDF}"=Datei\footnote{siehe Kapitel \ref{chap:urdf}} müssen dem \textit{RViz} die Information über das Aussehen zur Verfügung gestellt werden.
 \textit{URDF} ist ein Format für die Modell"=Beschreibung eines Roboters.
 %Und mit einem Set von Koordinatensystemen werden dem \text{RViz} Position und Orientierung für jeden Körper mitgeteilt. 
 %Genauer wird im Abschnitt xx auf die Koordinatensysteme eingegangen. %TODO ref tf
-In \textit{RViz} werden muss immer ein Koordinatensystem als fixe Referenz angegeben werden, normaler weise wird das Welt"=Koordinatensystem gewählt.
+In \textit{RViz} muss immer ein Koordinatensystem als fixe Referenz angegeben werden.
+Normalerweise wird das Welt"=Koordinatensystem gewählt.
 Um ein Körper im Raum darzustellen braucht \textit{RViz} eine Angabe zur Position und Orientierung relative zum Referenz"=Koordinatensystem.
-Diese Angabe als Transformation bezeichnet.
-Diese Transformations"=Daten erhält \textit{RViz} laufend und kann dann immer der aktuelle Zustand des Roboters darstellen. %TODO ref transf
+Diese Angabe wird als Transformation\footnote{siehe Kapitel \ref{chap:transformationen}} bezeichnet.
+Diese Transformations"=Daten erhält \textit{RViz} laufend und kann immer den aktuellen Zustand des Roboters darstellen.
 
 %Und aus den Transformations"=Daten die \textit{RViz} laufend erhält, kann es die Position und Orientierung jedes Körpers berechnen.
 %Und Informationen über die Position und Orientierung jedes Körpers kann \textit{RViz} über Transformationen.
@@ -162,18 +165,20 @@ Diese Transformations"=Daten erhält \textit{RViz} laufend und kann dann immer d
 
 
 \section{RQt}
+\label{chap:rqt}
 \textit{RQt} ist Framework für die GUI Entwicklung in \textit{ROS}.
 Diese GUI's werden als Plugins implementiert.
 Somit können mehre GUI's in einem \textit{RQt}"=Fenster verwendet werden.
-Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins. %TODO ref plugin list
-Es können aber auch selbst programmiert Plugins verwendet werden. 
-Für die Visualisierung von zeitabhängigen Grössen wird das \textit{RQt}"=Plugin \textit{multiplot} eingesetzt. %TODO ref und bild?
+Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins\footnote{\url{http://wiki.ros.org/rqt/Plugins}}.
+Es können aber auch selbst programmierte Plugins verwendet werden. 
+Für die Visualisierung von zeitabhängigen Grössen wird das \textit{RQt}"=Plugin \textit{multiplot}\footnote{\url{http://wiki.ros.org/rqt_multiplot}} eingesetzt. %TODO bild?
 
 %gui-tool, für das plugins vorhanden sind oder selber geschrieben werden können
 %hat für viele gängige ros-cli-tools ein RQt-plugin
 
 
 \section{Roboter-Modell} % Roboter"=Modell
+\label{chap:roboter-modell}
 %TODO titel mehrdeutig mehr so was wie: Datei-formate für beschreibung von Systemen, repräsentation, abbildung, Format für repräsentation von Systemen
 
 Die Programme \textit{Gazebo} und \textit{rviz} verwenden zwei unterschiedliche Datei"=Formate für die Modell"=Beschreibung.
@@ -182,32 +187,42 @@ Diese Strukturen sind aus Gliedern (Links) und Gelenken (Joints) aufgebaut.
 %Der Aufbau eines Modells wird im Kapitel xx erleutert.
 
 \subsection{URDF-Unified Robot Description Format}
-Das \textit{URDF}"=Format wird standardmässig in \textit{ROS} verwendet, für die Beschreibung von Robotern.
-Es kann nur kinematische Strukturen abbilden die einen Baum"=Form haben.
+\label{chap:urdf}
+Das \textit{URDF}"=Format\footnote{\url{http://wiki.ros.org/urdf}} wird standardmässig in \textit{ROS} verwendet für die Beschreibung von Robotern.
+Es kann nur kinematische Strukturen abbilden die ein Baum"=Form haben.
 Somit können keine geschlossenen kinematischen Ketten beschrieben werden.
-Im Kapitel xx wird beschrieben wie ein \textit{URDF}"=Model aufgebaut werden kann. %TODO ref
+Im Kapitel \ref{chap:urdf} wird beschrieben wie ein \textit{URDF}"=Model aufgebaut werden kann.
 
 \subsection{SDF-Simulation Description Format}
+\label{chap:sdf}
 Das \textit{SDF}"=Format wird bis jetzt ausschliesslich im \textit{Gazebo} verwendet.
 Es kann kinematische Graph-Strukturen abbilden.
-Deshalb könne auch geschlossenen kinematische Ketten beschrieben werden.
+Deshalb können auch geschlossene kinematische Ketten beschrieben werden.
 
-\subsection{Konvertierung}
+\subsection{Konvertierung URDF zu SDF}
+\label{chap:konvertierung}
 Damit für ein Roboter nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
 Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
 Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
 Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
-In welchen Fällen es solche spezial Elemente braucht und wie sie eingesetzt werden wird im Kapitel xx gezeigt. %TODO ref 
+In welchen Fällen es solche Spezial"=Elemente braucht und wie sie eingesetzt werden wird im Kapitel xx gezeigt. %TODO ref 
 %TODO ref auf kapitel in delta/motor
 %TODO urdf loader
 
-\subsection{Modell}
+\subsection{URDF-Modell}
+\label{urdf-modell}
 Ein Modell besteht aus den zwei Teilen: Glied (Link) und Gelenk (Joint).
 Für jedes gib es ein entsprechendes XML"=Element.
-Die Beziehung zwischen den beiden Komponenten ist in der Abbildung xx zusehen. %TODO ref
+Die Beziehung zwischen den beiden Komponenten ist in der Abbildung \ref{Ab:aufbaut-urdf} zusehen.
 Speziell zu beachten ist das die Abstände zwischen den Gelenken nicht vom Link"=Element sondern vom Joint"=Element definiert wird.
 Somit wird die Kinematische Struktur des Roboters nur über die Joint"=Elemente beschrieben.
-Auch ist das Koordinatensystem vom Gelenk gleichzeitig der Ursprung des Koordinatensystems vom Kind"=Glied des jeweiligen Gelenks. 
+Auch ist das Koordinatensystem vom Gelenk gleichzeitig der Ursprung des Koordinatensystems vom Kind"=Glied des jeweiligen Gelenks.
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=5.5cm]{images/urdf_model.png}
+	\caption{Aufbau URDF \cite{ros}}
+	\label{Ab:aufbaut-urdf}
+\end{figure}
 
 %bilder -> https://ni.www.techfak.uni-bielefeld.de/files/URDF-XACRO.pdf
 
@@ -215,15 +230,21 @@ Auch ist das Koordinatensystem vom Gelenk gleichzeitig der Ursprung des Koordina
 
 \subsubsection*{Link}
 Das Link"=Element beschreibt ein einzelnes Glied vom Roboter.
-Folgende Informationen sind als Sub"=Elementen enthalten: 
+Folgende Informationen sind als Sub"=Elemente enthalten: 
 \begin{itemize}
 \item Massenträgheit
 \item Geometrie und Material für Aussehen
 \item Geometrie für Kollisionsberechnung
 \end{itemize}
-Für jedes dieser Aufgelisteten Sub"=Element muss der Ursprung bezüglich des Link"=Koordinatensystem angegeben werden.
-Wie die verschiedenen Sub"=Elemente in Verbindung stehen ist in der Abbildung xx dargestellt. %TODO ref
-%In der Auflistung xx ist zusehen wie ein Link"=Element aufgebaut ist. %TODO ref
+Für jedes dieser aufgelisteten Sub"=Element muss der Ursprung bezüglich des Link"=Koordinatensystem angegeben werden.
+Wie die verschiedenen Sub"=Elemente in Verbindung stehen, ist in der Abbildung \ref{Ab:aufbaut-link} dargestellt.
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=5.5cm]{images/urdf_link.png}
+	\caption{Schematische Darstellung Link"=Element \cite{ros}}
+	\label{Ab:aufbaut-link}
+\end{figure}
+%In der Auflistung xx ist zusehen wie ein Link"=Element aufgebaut ist. 
 
 \subsubsection*{Joint}
 Mit dem Joint"=Element können Gelenke unterschiedlichster Art beschrieben werden.
@@ -234,12 +255,26 @@ Folgende Informationen braucht es zur Beschreibung eines Gelenks:
 \item Eltern Link"=Element
 \item Kind Link"=Element
 \end{itemize}
-Die Beziehung dieser Angaben  zueinander ist in Abbildung xx dargestellt.
+Die zwei häufigsten Gelenk"=Typ die verwendet werden sind:
+\begin{itemize}
+\item \textsc{"}kontinuierliche\textsc{"} Typ, freie Rotation um eine Achse (continuous)
+\item \textsc{"}fixe\textsc{"} Type, beide Links fest verbunden (fixed)
+\end{itemize} 
+Die Beziehung dieser Angaben  zueinander ist in Abbildung \ref{Ab:aufbaut-joint} dargestellt.
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=5.5cm]{images/urdf_joint.png}
+	\caption{Schematische Darstellung Joint"=Element \cite{ros}}
+	\label{Ab:aufbaut-joint}
+\end{figure}
+
+
 %Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref
 
 
 \section{Transformationen} % Bezugssystem
-Eine Transformation beschreibt wie eMit dem in Koordinatensystem relative zu einem anderen steht.
+\label{chap:transformationen}
+Eine Transformation beschreibt wie ein Koordinatensystem relative zu einem anderen steht.
 Koordinatensysteme beschreiben eine Position und Orientierung im Raum für zum Beispiel ein Glied.
 %Die Position und Orientierung eines Körpers im Raum kann mit einem Koordinatensystem beschrieben werde.
 Aufbau einer Transformation:
@@ -261,7 +296,7 @@ Zur Veranschaulichung ein Beispiel:
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=8cm]{images/Transformation.png}
-	\caption{Konzept}
+	\caption{Transformation}
 	\label{Ab:transformation}
 \end{figure}
 
@@ -272,9 +307,9 @@ Man berechnet das Koordinatensystem des grünen Gliedes in Bezug zu der Welt wie
 Die Angabe für das Koordinatensystem von Objekt \{B\}, in Bezug zu einem Koordinatensystem \{A\}, ist gleich zeitig auch die Transformation ($^{A}\xi_{B}$) von Koordinatensystem \{A\} zu \{B\}.
 
 \subsection{Umrechnung Gelenkwinkel zu Transformationen}
-Für die Umrechnung von den Winkelpositionen der Gelenke zu den Koordinaten"=Transformationen gibt es in \textit{ROS} der \textit{robot\_state\_publisher}.
+Für die Umrechnung von den Winkelpositionen der Gelenke zu den Koordinaten"=Transformationen gibt es in \textit{ROS} den \textit{robot\_state\_publisher}.
 Dieser \textit{ROS}"=Node benötigt die Beschreibung des Roboter"=Modells als \textit{URDF}"=Datei.
-Er setzt dann die Gelenkwinkel im Modell ein und rechnet dann die einzelnen Transformationen zwischen den Gelenken aus.
+Er setzt dann die Gelenkwinkel im Modell ein und rechnet anschliessend die einzelnen Transformationen zwischen den Gelenken aus.
 Da der Ursprung jedes Gliedes im Ursprung vom Gelenk liegt, sind die berechneten Transformationen gleichzeitig die zwischen den Gliedern.
 Mit diesen Transformationen kann dann \textit{RViz} die Glieder im Raum so Positionieren, dass es den Roboter korrekt darstellen kann.
 %Der \textit{robot\_state\_publisher} berechnet für jedes Gelenk die Transformationen und gibt sie aus.

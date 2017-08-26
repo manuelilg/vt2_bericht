@@ -11,21 +11,32 @@
 \section{Motivation}
 
 
+
+
+
 \section{Aufgabenstellung}
-Das Ziel dieser Arbeit ist zu evaluieren wie \textit{ROS} eingesetzt werden kann, um die Entwicklung von \textit{EEROS}"=Applikationen zu unterstützen.
-Dafür wird zuerst ein Konzept ausgearbeitet.
-Das Konzept wird an einem einfachen Fallbeispiel, bestehen aus einer Motorbaugruppe, gezeigt.
-FUUUUUCK
+Das Ziel dieser Arbeit ist zu evaluieren wie \textit{ROS} als unterstützendes Werkzeug für \textit{EEROS}"=Applikationen eingesetzt werden kann.
+%TODO sim und viz erwähnen
+%TODO synchron mit 
+Dafür soll zuerst ein Konzept ausgearbeitet werden, in dem unter anderem geklärt wird wie die Schnittstellen zwischen \textit{ROS} und \textit{EEROS} aussehen.
+Das Konzept soll anschliessend für zwei Fallbeispiele umgesetzt werden.
+Eine einfache Motor"=Baugruppe dient als erstes Fallbeispiel.
+Anhand dieses Beispiels soll die Korrektheit von dem Konzept gezeigt werden.
+Ausserdem soll %TODO arbeiten mit EEROS
+Das zweite Fallbeispiel ist der EEDURO"=Deltaroboter.
+Mit einem Deltaroboter soll gezeigt werden dass das Konzept auch funktionieren mit komplizierteren Robotern.
 
 
 
 %TODO weglassen??
 In dieser Arbeit wird EEROS als externe Software verwendet.
 Jedoch soll hier angemerkt werden dass jede Software verwendet werden kann, insofern die ROS-Library in diese integriert werden kann.
-Ein Beispiele wie diese Integration aussehen kann ist in der Arbeit %TODO ref arbeit mäsi zusehen / oder auf repo 
+Ein Beispiel wie diese Integration aussehen kann ist, in der Arbeit %TODO ref arbeit mäsi zusehen / oder auf repo 
 
+\section{Begriffe}
+In diesem Abschnitt werden in Kürze die Programme und Begriffe vorgestellt  die in dieser Arbeit verwendet werden.
 
-\section{ROS}
+\subsection{ROS}
 \textit{ROS} (Robot Operating System) ist ein Software"=Framework für die Programmierung von Roboteranwendungen.
 Mit \textit{ROS} werden vor allem übergeordnete Aufgaben in einer Roboteranwendung umgesetzt.
 Es besteht aus einem Set von Softwarebibliotheken und Werkzeugen.
@@ -33,38 +44,45 @@ Die einzelnen Teile von \textit{ROS} sind organisiert als Packages.
 Das \textit{ROS}"=Netzwerk besteht aus Knoten die über Peer"=to"=Peer miteinander kommunizieren.
 
 Für das Verständnis dieser Arbeit ist ein Grundwissen über \textit{ROS} essentiell.
-Im Abschnitt xx werden die Begriffe aus \textit{ROS} nochmals kurz aufgefrischt. %TODO ref
+Im Abschnitt \ref{chap:ros-komponenten} werden die Begriffe aus \textit{ROS} nochmals kurz aufgefrischt.
 Darum wird \textit{ROS}"=Neulinge empfohlen, sich einen Überblick über \textit{ROS} zu verschaffen.
 Gute Quellen für dies sind:
 \begin{itemize}
-\item Core Componets %TODO ref http://www.ros.org/core-components/
-\item ROS Wiki
-\item Arbeit Andreas Kalberer
+\item Core Componets\footnote{\url{http://www.ros.org/core-components/}} 
+\item ROS Wiki\footnote{\url{http://wiki.ros.org/}}
+\item Arbeit \textit{\textsc{"}MME Simulationsprojekt: ROS und Gazebo\textbf{"}} \footnote{siehe Anhang xx} %TODO ref
 \end{itemize}
 
-
-\subsection{ROS"=Komponenten}
+\subsubsection{ROS"=Komponenten}
+\label{chap:ros-komponenten}
 In diesem Kapitel werden die wichtigsten \textit{ROS}"=Komponenten aufgelistet.
 Es werden nur die Begriffe der Komponenten kurz vorgestellt.
-Die Begriffe werden bewusst nicht ins Deutsche übersetzt damit die Begriffe geläufig sind wenn man die offizielle \textit{ROS}"=Dokumentation konsultiert.
+Die Begriffe werden bewusst nicht ins Deutsche übersetzt damit die Begriffe geläufig sind, wenn man die offizielle \textit{ROS}"=Dokumentation konsultiert.
 
 \paragraph*{Master} \mbox{}\\
 Der Master ist die Kernkomponente vom \textit{ROS}"=Netzwerk.
 Er verwaltet die Kommunikation zwischen den Knoten (Nodes).
-Das Kommunikationsverfahren das verwendet wird ist das Publish\,\&\,Subscribe Prinzip. %TODO ref https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
+Das Kommunikationsverfahren das verwendet wird ist das Publish\,\&\,Subscribe\footnote{\url{https://en.wikipedia.org/wiki/Publish\%E2\%80\%93subscribe_pattern}}  Prinzip. 
 
-\subsubsection{Nodes}
+\paragraph*{Nodes} \mbox{}\\
 Knoten sind Prozesse in denen Berechnungen oder Treiber ausgeführt werden. 
 Somit kann ein Knoten eine Datenverarbeitung, ein Aktor oder ein Sensor darstellen.  
 
-\subsubsection{Messages}
+\paragraph*{Messages} \mbox{}\\
 Die Messages sind eine Konvention für den Austausch von Daten.
 Darum gibt es für die unterschiedlichen Anforderungen der Kommunikation, verschiedene Nachricht"=Typen.
 
-\subsubsection{Topics}
+\paragraph*{Topics} \mbox{}\\
 Der Nachrichtenaustausch mit dem Publish\,\&\,Subscribe Mechanismus ist anonym.
 Darum werden die Nachrichten unter einem Thema (Topic) ausgetauscht.
 
-\section{EEROS}
-\textit{EEROS} ist eine Roboter"=Framework mit Fokus auf die Ausführung von Echtzeit"=Aufgaben.
+\subsection{EEROS} \mbox{}\\
+\textit{EEROS}\footnote{\url{http://eeros.org}} ist eine Roboter"=Framework mit Fokus auf die Ausführung von Echtzeit"=Aufgaben.
 Somit ist es geeignet für die Umsetzung von untergeordneten Aufgaben in einer Roboteranwendung, wie das Regeln von einem Motor.
+
+
+\section{Zusammenarbeit}
+%TODO fertig machen
+Bei der Entwicklung der Kommunikation und Synchronisation mit EEROS hat Marcel Gehrig aktiv mit geholfen.
+In der Arbeit \textsc{"}Eine ROS Anbindung für EEROS\textsc{"} von Marcel Gehrig wird beschrieben wie \textit{EEROS} in das \textit{ROS}"=Netzwerk eingebunden wird.
+
