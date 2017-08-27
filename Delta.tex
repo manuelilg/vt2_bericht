@@ -8,7 +8,7 @@ Die Modell-Beschreibung des Roboters ist im \textit{URDF}"=Format gehalten.
 Dabei wurde gleich vorgegangen wie für die Motor"=Apparatur\footnote{siehe Kapitel \ref{chap:motor}}, deshalb werden in diesem Kapitel nur noch neue Aspekte erläutert.
 %TODO bild
 
-Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} eingesetzt worden.
+Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} eingesetzt wurde.
 
 \section{Modell}
 \label{chap:delta-modell}
@@ -21,7 +21,7 @@ Das Modell des Delta-Roboter kann grob in drei gleiche Teile aufgeteilt werden:
 \end{itemize}
 
 Der Arm selber besteht aus einem Oberarm auch Link 1 genannt und aus einem Unterarm.
-Der Unterarm selber besteht selber wider aus:
+Der Unterarm selber besteht selber wieder aus:
 \begin{itemize}
 \item Doppelgabel (Link 2)
 \item zwei Stangen (Link 3.1 und Link 3.2)
@@ -34,13 +34,13 @@ Wie beim Motor muss die kinematisch Kette geschlossen werden mit dem \textit{SDF
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=12cm]{images/delta_struktur.png}
+	\includegraphics[width=14.5cm]{images/delta_struktur.png}
 	\caption{kinematische Struktur EEDURO-Delta}
 	\label{Ab:delta-struktur}
 \end{figure}
 
 \subsection{Parameter für Modell}
-In diesem Abschnitt wird darauf eingegangen welche Parameter es braucht für die Erstellung vom Modell.
+In diesem Abschnitt wird darauf eingegangen, welche Parameter es braucht für die Erstellung vom Modell.
 \begin{itemize}
 \item Masse und Trägheitstensor von allen Links
 \item Längenmasse wie Abstand zwischen zwei Gelenken
@@ -54,7 +54,7 @@ Diese Datenblätter sind im Repository xx zu finden. %TODO ref
 Für jedes Glied musste die Masse und Rotationsträgheit berechnet werden, damit das Modell des Roboters sich in der Simulation wie der reale Roboter verhält.
 Die Glieder bestehen jedoch aus mehreren Bauteilen.
 Dieser Umstand verkompliziert die Berechnung sehr.
-Auch erschwerend kam hinzu das die CAD"=Daten nur im \textit{STEP}"=Austauschformat vorliegend waren.
+Auch erschwerend kam hinzu, dass die CAD"=Daten nur im \textit{STEP}"=Austauschformat vorliegend waren.
 
 Das führt zu folgendem Arbeitsablauf:
 \begin{itemize}
@@ -97,9 +97,9 @@ Somit gibt es folgenden Prozess Graph.
 
 
 
-\subsection{Vereinfachung}
-Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die System"=Beschreibung wurde schon im Kapitel xx Konvertierung vorgestellt. %TODO ref
-Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
+%\subsection{Vereinfachung}
+%Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die System"=Beschreibung wurde schon im Kapitel xx Konvertierung vorgestellt. %TODO ref
+%Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
 
 
 

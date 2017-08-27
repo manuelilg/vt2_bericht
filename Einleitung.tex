@@ -15,21 +15,21 @@ bruch i da Mäsi??
 
 
 \section{Aufgabenstellung}
-Das Ziel dieser Arbeit ist zu evaluieren wie \textit{ROS} als unterstützendes Werkzeug für \textit{EEROS}"=Applikationen eingesetzt werden kann.
+Das Ziel dieser Arbeit ist zu evaluieren, wie \textit{ROS} als unterstützendes Werkzeug für \textit{EEROS}"=Applikationen eingesetzt werden kann.
 Dabei soll vor allem ein Werkzeug für Simulationen und eines für Visualisierungen getestet werden.
 
 %TODO sim und viz erwähnen
 %TODO synchron mit 
-Dafür soll zuerst ein Konzept ausgearbeitet werden, in dem unter anderem geklärt wird wie die Schnittstellen zwischen \textit{ROS} und \textit{EEROS} aussehen.
+Dafür soll zuerst ein Konzept ausgearbeitet werden, in dem unter anderem geklärt wird, wie die Schnittstellen zwischen \textit{ROS} und \textit{EEROS} aussehen.
 Das Konzept soll anschliessend für zwei Fallbeispiele umgesetzt werden.
 Eine einfache Motor"=Apparatur dient als erstes Fallbeispiel.
-Anhand dieses Beispiels wird die Korrektheit vom Konzept überprüft.
+Anhand dieses Beispiels wird die Korrektheit des Konzeptes überprüft.
 Denn es soll eine \textit{EEROS}"=Applikation mithilfe diese Fallbeispiels entwickelt und getestet werden.
 Das zweite Fallbeispiel ist der EEDURO"=Deltaroboter.
 Mit einem Deltaroboter soll gezeigt werden, dass das Konzept auch mit komplizierteren Robotern funktioniert.
 
 \section{Begriffe}
-In diesem Abschnitt werden in Kürze die Programme und Begriffe vorgestellt  die in dieser Arbeit verwendet werden.
+In diesem Abschnitt werden in Kürze die Programme und Begriffe vorgestellt, die in dieser Arbeit verwendet werden.
 
 \subsection{ROS}
 \textit{ROS} (Robot Operating System) ist ein Software"=Framework für die Programmierung von Roboteranwendungen.
@@ -40,7 +40,7 @@ Das \textit{ROS}"=Netzwerk besteht aus Knoten die über Peer"=to"=Peer miteinand
 
 Für das Verständnis dieser Arbeit ist ein Grundwissen über \textit{ROS} essentiell.
 Im Abschnitt \ref{chap:ros-komponenten} werden die Begriffe aus \textit{ROS} nochmals kurz aufgefrischt.
-Darum wird \textit{ROS}"=Neulinge empfohlen, sich einen Überblick über \textit{ROS} zu verschaffen.
+Darum wird \textit{ROS}"=Neulingen empfohlen, sich einen Überblick über \textit{ROS} zu verschaffen.
 Gute Quellen für dies sind:
 \begin{itemize}
 \item Core Componets\footnote{\url{http://www.ros.org/core-components/}} 
@@ -57,7 +57,7 @@ Die Begriffe werden bewusst nicht ins Deutsche übersetzt damit die Begriffe gel
 \paragraph*{Master} \mbox{}\\
 Der Master ist die Kernkomponente vom \textit{ROS}"=Netzwerk.
 Er verwaltet die Kommunikation zwischen den Knoten (Nodes).
-Das Kommunikationsverfahren das verwendet wird ist das Publish\,\&\,Subscribe\footnote{\url{https://en.wikipedia.org/wiki/Publish\%E2\%80\%93subscribe_pattern}}  Prinzip. 
+Das Kommunikationsverfahren das verwendet wird, ist das Publish\,\&\,Subscribe\footnote{\url{https://en.wikipedia.org/wiki/Publish\%E2\%80\%93subscribe_pattern}}  Prinzip. 
 
 \paragraph*{Nodes} \mbox{}\\
 Knoten sind Prozesse in denen Berechnungen oder Treiber ausgeführt werden. 
@@ -65,19 +65,19 @@ Somit kann ein Knoten eine Datenverarbeitung, ein Aktor oder ein Sensor darstell
 
 \paragraph*{Messages} \mbox{}\\
 Die Messages sind eine Konvention für den Austausch von Daten.
-Darum gibt es für die unterschiedlichen Anforderungen der Kommunikation, verschiedene Nachricht"=Typen.
+Darum gibt es für die unterschiedlichen Anforderungen der Kommunikation, verschiedene Nachrichten"=Typen.
 
 \paragraph*{Topics} \mbox{}\\
 Der Nachrichtenaustausch mit dem Publish\,\&\,Subscribe Mechanismus ist anonym.
 Darum werden die Nachrichten unter einem Thema (Topic) ausgetauscht.
 
 \subsection{EEROS} \mbox{}\\
-\textit{EEROS}\footnote{\url{http://eeros.org}} ist eine Roboter"=Framework mit Fokus auf die Ausführung von Echtzeit"=Aufgaben.
+\textit{EEROS}\footnote{\url{http://eeros.org}} ist ein Roboter"=Framework mit Fokus auf die Ausführung von Echtzeit"=Aufgaben.
 Somit ist es geeignet für die Umsetzung von untergeordneten Aufgaben in einer Roboteranwendung, wie das Regeln von einem Motor.
 
 
 \section{Zusammenarbeit}
 An der Ausarbeitung des Konzeptes hat Marcel Gehrig aktiv mitgewirkt.
-Denn die \textit{ROS}"=Schnittstelle im \textit{EEROS}, die er im Rahmen seiner Arbeit \textit{Eine ROS Anbindung für EEROS} entwickel hat, ist eine integraler Bestandteil des Konzepts.
+Denn die \textit{ROS}"=Schnittstelle im \textit{EEROS}, die er im Rahmen seiner Arbeit \textit{\textit{"}Eine ROS Anbindung für EEROS\textit{"}}\footnote{siehe Anhang xx} entwickelt hat, ist eine integraler Bestandteil des Konzepts.
 Auch hat er die \textit{EEROS}"=Applikation für das Fallbeispiel Motor"=Apparatur entwickelt und somit die Umsetzung des Fallbeispiels validiert.
 %TODO verweis arbeit

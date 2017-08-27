@@ -18,14 +18,14 @@ Das Fallbeispiel ist eine Motor"=Apparatur (Abbildung \ref{Ab:motor-baugruppe}).
 
 Für dieses System muss im \textit{EEROS} ein Regler entwickelt werden.
 Um die Entwicklung zu unterstützen und den Regler zu testen, wird eine Simulation erstellt.
-Und mit Plots von den Stell"= und Regel"=Grössen kann die Leistung des Reglers besser beurteilt werden.
+Mit Plots von den Stell"= und Regel"=Grössen kann die Leistung des Reglers besser beurteilt werden.
 %Und um die Leistung des Reglers besser beurteilen zu können werden Stell"= und Regel"=Grössen in Plots dargestellt.
 
 %Darum braucht es eine Simulation der Motor"=Baugruppe mit der der Regler getestet werden kann.
 %Und auch eine Visualisierung mit der das Verhalten des Regler in einem Plot dargestellt werden kann.
 
 %In diesem Kapitel wird anhand eines einfachen Fallbeispiels gezeigt, wie eine Simulation in Gazebo erstellt wird.
-Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es braucht um eine Simulation und Visualisierungen erstellen zu können.
+Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es braucht um eine Simulation und Visualisierung erstellen zu können.
 %Ein Motor-Baugruppe (Abbildung \ref{Ab:motor-baugruppe}) soll als einfache Beispiel dienen.
 
 
@@ -38,14 +38,14 @@ Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es b
 
 \section{Motor"=Apparatur}
 Die Baugruppe besteht aus einem Motor, Schwungrad und linearen Dämpfer.
-Diese drei Komponenten sind mit einander verbunden.
-Der lineare Dämpfer ist realisiert durch einen zweiten kurzgeschlossenen Motor.
+Diese drei Komponenten sind miteinander gekoppelt.
+Der lineare Dämpfer ist realisiert, durch einen zweiten kurzgeschlossenen Motor.
 
-Die Parameter für das Simulations"=Model konnten grössten teils aus den Datenblättern der jeweiligen Komponenten entnommen werden. 
+Die Parameter für das Simulations"=Model konnten grösstenteils aus den Datenblättern der jeweiligen Komponenten entnommen werden. 
 Die Dämpfungskonstante des Dämpfers und die Rotationsträgheit der Schwungscheibe mussten berechnet werden.
 Die Datenblätter und Berechnungen sind im Repository \textit{\textsc{"}motor\_sim\textit{"}} \footnote{\url{https://github.com/manuelilg/motor\_sim/tree/master/motor\_description/datasheets}} zu finden. 
 
-Für Parameter die nicht im Datenblatt stehen oder nicht genügend Informationen für eine Berechnung vorhanden ist, wurden geschätzt.
+Für Parameter die nicht im Datenblatt stehen, oder nicht genügend Informationen für eine Berechnung vorhanden waren, wurden geschätzt.
 Jedoch haben die geschätzten Parameter in diesem Fallbeispiel keinen nennenswerten Einfluss auf die Simulation.
 %Somit haben wir folgende Werte die für die physikalische Beschreibung des Modells.
 %Für jeden Link müssen immer die Masse und der Trägheits-tensor definiter sein. Dabei darf die Masse nicht 0 sein und 
@@ -54,8 +54,8 @@ Jedoch haben die geschätzten Parameter in diesem Fallbeispiel keinen nennenswer
 \section{Modell}
 Für die Apparatur wurde eine Modell"=Beschreibung im \textit{URDF}"=Format erstellt.
 Die Kinematische Struktur des Modells ist in der Abbildung \ref{Ab:motor-struktur} dargestellt.
-Auffallend ist das der Dämpfer noch nicht mit dem Schwungrad gekoppelt ist.
-Warum dies so ist wird im Kapitel \ref{chap:kin-schliessen} erläutert.
+Auffallend ist, dass der Dämpfer noch nicht mit dem Schwungrad gekoppelt ist.
+Warum dies so ist, wird im Kapitel \ref{chap:kin-schliessen} erläutert.
 %TODO chode ausschnitt urdf
 
 \begin{figure}[ht!]
@@ -106,7 +106,7 @@ Die in diesem Abschnitt erklärte Anpassung wird benötigt, damit in der Simulat
 Im \textit{URDF} können Informationen hinterlegt werden, die nur \textit{Gazebo} interpretiert.
 Dafür müssen die Informationen mit dem XML"=Element \textsc{"}gazebo\textsc{"} umschlossen werden.
 
-Wenn man jetzt ein Joint"=Element im \textit{SDF}"=Format einsetzt kann man die kinematische Struktur schliessen.
+Wenn man jetzt ein Joint"=Element im \textit{SDF}"=Format einsetzt, kann man die kinematische Struktur schliessen.
 Denn die {URDF}"=Datei wird, bevor es ins \textit{Gazebo} geladen wird, ins \textit{SDF}"=Format konvertiert.
 Während der Konvertierung werden die Zeilen die sich im XML"=Element \textsc{"}gazebo\textsc{"} befinden einfach ins \textit{SDF} übernommen.
 
@@ -115,15 +115,15 @@ Wie der Eintrag für die Motor"=Baugruppe lauten muss, ist in Auflistung xx geze
 \subsubsection{Mimic}
 \label{chap:mimic}
 Der \textit{ROS}"=Knoten \textit{robot\_state\_publisher} berechnet die Transformations"=Daten für die Darstellung der Körper im \textit{RViz}.
-Dafür braucht er von alle Gelenken im Modell die Gelenkwinkel.
-Das Modell vom \textit{URDF} hat zwei Gelenke aber das in der Simulation nur eines.
+Dafür braucht er von allen Gelenken im Modell die Gelenkwinkel.
+Das Modell vom \textit{URDF} hat zwei Gelenke, aber das in der Simulation nur eines.
 Da in der Simulation die beiden Gelenke fix verbunden sind (siehe Kapitel \ref{chap:sdf-joint}).
 
 Deshalb muss im Gelenk folgender Eintrag eingefügt werden: %TODO joint name
 %TODO listing mimic
 
 Dieser Eintrag wird vom \textit{ROS}"=Knoten \textit{joint\_state\_publisher} interpretiert.
-Er bewirkt das das Gelenk xx der gleiche Winkel hat wie das Gelenk xx.
+Er bewirkt, dass das Gelenk xx der gleiche Winkel hat, wie das Gelenk xx.
 Somit erhalten wir vom \textit{joint\_state\_publisher} für die Eingabe von einem Gelenkwinkel xx, die Ausgabe für die Gelenkwinkel xx und xx.
 
 Diese beiden werden dann vom \textit{robot\_state\_publisher} als Eingabe benötigt.
@@ -132,7 +132,7 @@ In Abbildung xx ist der Informationsfluss dargestellt, der aus den oben genannte
 \subsection{Gazebo Plugins}
 Damit das Modell in der Simulation mit dem \textit{ROS}"=Netzwerk interagieren kann, müssen Plugins eingesetzt werden.
 
-Mit Folgenden Zeilen werden zwei \textit{Gazebo}"=Plugins im Motor"=Modell eingebettet:
+Mit folgenden Zeilen werden zwei \textit{Gazebo}"=Plugins im Motor"=Modell eingebettet:
 %TODO listing
 
 %TODO vergleiche kapitel gazebo plugins ??
@@ -144,7 +144,7 @@ Das zweite Plugin xx wird im Abschnitt \ref{chap:joint-force-plugin} genauer erl
 
 \subsubsection{Joint Force Plugin}
 \label{chap:joint-force-plugin}
-Dieses Plugin würde im Rahmen dieser Arbeit erstellt und ist im Repository xx zu finden.
+Dieses Plugin wurde im Rahmen dieser Arbeit erstellt und ist im Repository xx zu finden.
 Teile von dem Plugin werden vor jedem Simulations"=Schritt aufgerufen und erfüllen somit folgende Aufgaben.
 %Das Plugin xx appliziert ein Drehmoment auf das Gelenk xx.
 %Die Grösse des Drehmoments erhält das Plugin über das Topic xx.
