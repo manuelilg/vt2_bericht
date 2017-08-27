@@ -31,7 +31,7 @@ Durch das einfache Beispiel können alle Grundlagen vorgestellt werden, die es b
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=14.5cm]{images/motor_baugruppe.png} %TODO anpassen
+	\includegraphics[width=14.5cm]{images/motor_baugruppe.png}
 	\caption{schematische Darstellung von Motor-Apparatur}
 	\label{Ab:motor-baugruppe}
 \end{figure}
@@ -177,7 +177,7 @@ Er bewirkt, dass das Gelenk \textit{\textit{"}damper\_axis\textit{"}} den gleich
 Somit erhalten wir vom \textit{joint\_state\_publisher} für die Eingabe von einem Gelenkwinkel \textit{\textit{"}motor\_axis\textit{"}}, die Ausgabe für die Gelenkwinkel \textit{\textit{"}motor\_axis\textit{"}} und \textit{\textit{"}damper\_axis\textit{"}}.
 
 Diese beiden werden dann vom \textit{robot\_state\_publisher} als Eingabe benötigt.
-In Abbildung xx ist der Informationsfluss dargestellt, der aus den oben genannten Fakten resultiert. %TODO ref
+In Abbildung \ref{Ab:prozess} wird gezeigt wie der \textit{robot\_state\_publisher} bei der Visualisierung von einem Delta"=Roboter eingesetzt wird.
 
 \subsection{Gazebo Plugins}
 Damit das Modell in der Simulation mit dem \textit{ROS}"=Netzwerk interagieren kann, müssen Plugins eingesetzt werden.
@@ -220,20 +220,55 @@ Teile von dem Plugin werden vor jedem Simulations"=Schritt aufgerufen und erfül
 \end{itemize}
 
 \section{Installation}
+In diesem Abschnitt wird die Installation vom \textit{ROS}"=Bestandteil des Fallbeispiel Mortor"=Apparatur erklärt.
+Die Installation vom \textit{EEROS}"=Bestandteil wird in der Arbeit \textit{\textit{"}Eine ROS Anbindung für EEROS\textit{"}} von Marcel Gehrig gezeigt.
 
+Alle erforderliche Repositorys in \textit{Workspace} klonen:
+\begin{lstlisting}
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/manuelilg/motor_sim.git
+$ git clone https://github.com/manuelilg/gazebo_ros_joint_force.git
+$ git clone https://github.com/manuelilg/gazebo_ros_pkgs.git
+\end{lstlisting} 
+
+Alle geklonten Packages kompilieren:
+\begin{itemize}
+\item mit \textit{catkin-tools}~\footnote{\url{http://catkin-tools.readthedocs.io/en/latest/index.html}} (empfohlen)
+\begin{lstlisting}
+$ catkin build
+\end{lstlisting}
+\item mit \textit{catkin\_make}~\footnote{\url{http://wiki.ros.org/catkin/commands/catkin\_make}}
+\begin{lstlisting}
+$ catkin_make
+\end{lstlisting}
+\end{itemize}
+
+Umgebungsvariablen laden für Ausführung:
+\begin{lstlisting}
+$ source ~/catkin_ws/devel/setup.bash
+\end{lstlisting}
 
 \section{Ausführen}
+In diesem Abschnitt wird gezeigt wie die verschiedenen Bestandteile gestartet werden können.
 \subsection{Gazebo}
+Simulation von Motor"=Apparatur starten (Simulation ist pausiert)
+\begin{lstlisting}
+$ roslaunch motor_gazebo motor_gazebo.launch
+\end{lstlisting}
+
+Anschliessend um die Simulation zu beeinflusse \textit{EEROS} starten.
 
 \subsection{RViz}
-system wird geladen mit robot description
-braucht auch tf
-%TODO bild info fluss
-
-\section{rqt}
-keine speziellen anpassungen an urdf 
-
-\section{Starten}
-einzelnen programme gazebo, rviz, rqt
+\textit{RViz} für Visualisierung von Modell starten
+\begin{lstlisting}
+$ roslaunch motor_description motor_rviz.launch
+\end{lstlisting}
+vorgängig oder anschliessend \textit{EEROS} starten (zusammen mit Simulation oder Hardware)
 
 
+\section{RQt}
+\textit{RQt} für das Ploten der System"=Grössen starten
+\begin{lstlisting}
+$ roslaunch motor_rqt motor_rqt.launch
+\end{lstlisting}
+vorgängig oder anschliessend \textit{EEROS} starten (zusammen mit Simulation oder Hardware)

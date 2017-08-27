@@ -83,13 +83,11 @@ Die CAD"=Daten und Matlab"=Dateien sind im Repository xx zufinden.
 
 \subsubsection{XACRO}
 \label{chap:xacro}
-\textit{XACRO} ist eine Makro Sprache für XML"=Dateien. %TODO ref url
+\textit{XACRO}~\footnote{\url{http://wiki.ros.org/xacro}} ist eine Makro Sprache für XML"=Dateien.
 Mit \textit{XACRO} können kürzere und einfacher zu unterhaltende XML"=Dateien erstellt werden.
 Denn mit Hilfe der Makros können Wiederholungen vermieden werden.
 Auch kann Dank \textit{XACRO} eine XML"=Datei in mehrere Unterdateien aufgeteilt werden.
 Somit kann ein komplexes System logisch in Untersysteme aufgeteilt werden, die dann jeweils in einer eigenen XML"=Datei beschrieben werden. 
-%TODO vorteile einsezen in delta
-Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Datei des Delta-Roboters gezeigt.
 
 
 
@@ -104,13 +102,81 @@ Mit Werkzeug"=Position können anschliessend die Winkel aller Gelenke des Robote
 Somit müssen für die visualisiert des EEDURO"=Delta"=Roboters im \textit{RViz} nur die drei Gelenkwinkel von den Oberarmen bekannt sein.
 Diese Winkel können wahlweise von der Hardware oder von der Simulation kommen.
 
-%TODO aus anderem Bericht nehmen
+Eine Ausführliche Dokumentation dieses \textit{ROS}"=Knotens kann im Anhang xx gefunden werden. %TODO anhang
+
+In Abbildung \ref{Ab:prozess} ist der ganze Prozess"=Graph mit allen beteiligten Komponenten dargestellt.
+
+\begin{figure}[ht!]
+	\centering
+\begin{tikzpicture}[scale=1,node distance=5mm,
+	link/.style={rectangle, draw=black, thick, inner sep=7},
+	joint/.style={ellipse, draw=blue, thick},
+	>=latex]
+ 	
+ \node[link] (pub1) {eeduro\_delta\_joint\_state\_publisher};
+ \node[link, above left=of pub1] (hard) {hardware};
+ \node[link, above right=of pub1] (sim) {simulation};
+ \node[link, below=of pub1] (pub2) {joint\_state\_publisher};
+ \node[link, below=of pub2] (pub3) {robot\_state\_publisher};
+ \node[link, below=of pub3] (rviz) {RViz};
+ 
+ \path[->, thick]
+ 	(hard) edge (pub1)
+ 	(sim) edge (pub1)
+ 	(pub1) edge (pub2)
+ 	(pub2) edge (pub3)
+ 	(pub3) edge (rviz);
+ 	
+\end{tikzpicture}
+	\caption{Prozess-Graph Visualisierung Deltaroboter}
+	\label{Ab:prozess}
+\end{figure}
+
+\section{Installation}
+In diesem Abschnitt wird die Installation des Repository \textit{\textit{"}eeduro\_delta\textbf{•}} gezeigt.
+
+Alle erforderliche Repositorys in \textit{Workspace} klonen:
+\begin{lstlisting}
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/manuelilg/eeduro_delta.git
+$ git clone https://github.com/manuelilg/gazebo_ros_joint_force.git
+$ git clone https://github.com/manuelilg/gazebo_ros_pkgs.git
+\end{lstlisting} 
+
+Alle geklonten Packages kompilieren:
+\begin{itemize}
+\item mit \textit{catkin-tools}~\footnote{\url{http://catkin-tools.readthedocs.io/en/latest/index.html}} (empfohlen)
+\begin{lstlisting}
+$ catkin build
+\end{lstlisting}
+\item mit \textit{catkin\_make}~\footnote{\url{http://wiki.ros.org/catkin/commands/catkin\_make}}
+\begin{lstlisting}
+$ catkin_make
+\end{lstlisting}
+\end{itemize}
+
+Umgebungsvariablen laden für Ausführung:
+\begin{lstlisting}
+$ source ~/catkin_ws/devel/setup.bash
+\end{lstlisting}
+
+\section{Ausführen}
+In diesem Abschnitt wird gezeigt wie die verschiedenen Bestandteile gestartet werden können.
+\subsection{Gazebo}
+\textit{Gazebo}"=Simulation von EEDURO"=Delta starten (Simulation ist pausiert)
+\begin{lstlisting}
+$ roslaunch eeduro_delta_gazebo eeduro_delta_world.launch
+\end{lstlisting}
+
+\subsection{Gazebo mit RViz}
+\textit{Gazebo} zusammen mit \textit{RViz} starten (vgl. Abbildung \ref{Ab:prozess})
+\begin{lstlisting}
+$ roslaunch eeduro_delta_gazebo eeduro_delta_rviz.launch
+\end{lstlisting}
 
 
-Somit gibt es folgenden Prozess Graph.
-
-
-
-
-\section{Installation und Ausführung}
-Verweis auf Repository readme
+\section{RQt}
+\textit{RQt} für das Ploten der System"=Grössen starten
+\begin{lstlisting}
+$ roslaunch 
+\end{lstlisting}
