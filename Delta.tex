@@ -94,16 +94,21 @@ Im Kapitel XX werden die Vorteile von \textit{XACRO} in der \textit{URDF} "=Date
 
 
 \section{EEDURO-Delta Joint State Publisher}
-Wie schon im mehrmals erwähnt braucht %TODO aus anderem Bericht nehmen
+Der \textit{ROS}"=Knoten \textit{\textit{"}eeduro\_delta\_joint\_state\_publisher\textit{"}} erfüllt folgende Aufgaben:
+\begin{itemize}
+\item Direkt"=Kinematik berechnen
+\item alle Gelenkwinkel ausrechnen
+\end{itemize}
+Die Direkt"=Kinematik berechnet die Werkzeug"=Position aus den drei Gelenkwinkeln von den Oberarmen des Delta"=Roboters.
+Mit Werkzeug"=Position können anschliessend die Winkel aller Gelenke des Roboters berechnet werden.
+Somit müssen für die visualisiert des EEDURO"=Delta"=Roboters im \textit{RViz} nur die drei Gelenkwinkel von den Oberarmen bekannt sein.
+Diese Winkel können wahlweise von der Hardware oder von der Simulation kommen.
+
+%TODO aus anderem Bericht nehmen
 
 
 Somit gibt es folgenden Prozess Graph.
 
-
-
-%\subsection{Vereinfachung}
-%Eine Vereinfachung für das erstellen und unterhalten von den Dateien für die System"=Beschreibung wurde schon im Kapitel xx Konvertierung vorgestellt. %TODO ref
-%Mit dem Programm \textit{XACRO} kommt eine weitere hinzu. 
 
 
 

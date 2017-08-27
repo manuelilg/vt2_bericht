@@ -135,7 +135,7 @@ Dieser Mangel kann aber behoben werden mit: einem \textit{SDF}"=Joint Eintrag im
 
 \subsubsection{SDF"=Joint}
 \label{chap:sdf-joint}
-Die in diesem Abschnitt erklärte Anpassung wird benötigt, damit in der Simulation das Schwungrad und der Dämpfer miteinander gekoppelt sind.
+Die in diesem Abschnitt erklärte Anpassung wird benötigt, damit in der Simulation das Schwung"-rad und der Dämpfer miteinander gekoppelt sind.
 
 Im \textit{URDF} können Informationen hinterlegt werden, die nur \textit{Gazebo} interpretiert.
 Dafür müssen die Informationen mit dem XML"=Element \textsc{"}gazebo\textsc{"} umschlossen werden.
@@ -201,7 +201,7 @@ Mit den in Auflistung \ref{lst:plugin} gezeigten Zeilen werden zwei \textit{Gaze
   </gazebo>
 \end{lstlisting}
 %TODO vergleiche kapitel gazebo plugins ??
-Das Plugin \textit{\textit{"}gazebo\_ros\_joint\_state\_publisher\textit{"}} misst den Winkel von Gelenk \textit{\textit{"}motor\_axis\textit{"}} und stellt den Messwert zu Verfügung (publish).
+Das Plugin \textit{\textit{"}gazebo\_ros\_joint\_state\_publisher\textit{"}} misst den Winkel von Gelenk \textit{\textit{"}motor\_axis\textit{"}} und stellt den Messwert zu Verfügung (publish).\\
 Es ist im Standard \textit{ROS"=Package} \textit{\textit{"}gazebo\_ros\_pkgs\textit{"}}~\footnote{\url{http://wiki.ros.org/gazebo_ros_pkgs}} enthalten.
 Achtung das Gazebo"=Plugin \textit{\textit{"}gazebo\_ros\_joint\_state\_publisher\textit{"}} ist nicht mit dem ROS"=Knoten \textit{\textit{"}joint\_state\_publisher\textit{"}} zu verwechseln.
 

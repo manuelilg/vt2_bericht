@@ -35,7 +35,7 @@ node [shape=ellipse, color=blue, fontcolor=blue];
 "arm1_motor_joint"
 "arm1_motor_joint" -> "arm1_motor"
 
-node [shape=ellipse, color=green, fontcolor=green];
+node [shape=ellipse, color=green3, fontcolor=green3];
 "arm1_motor" -> "arm1_gearbox" 
 "arm1_gearbox" -> "arm1_link1"
 "arm1_link3_2" -> "arm1_joint3_2" 
@@ -70,7 +70,7 @@ node [shape=ellipse, color=blue, fontcolor=blue];
 "arm2_motor_joint"
 "arm2_motor_joint" -> "arm2_motor"
 
-node [shape=ellipse, color=green, fontcolor=green];
+node [shape=ellipse, color=green3, fontcolor=green3];
 "arm2_motor" -> "arm2_gearbox" 
 "arm2_gearbox" -> "arm2_link1"
 "arm2_link3_2" -> "arm2_joint3_2" 
@@ -107,7 +107,7 @@ node [shape=ellipse, color=blue, fontcolor=blue];
 "arm3_motor_joint"
 "arm3_motor_joint" -> "arm3_motor"
 
-node [shape=ellipse, color=green, fontcolor=green];
+node [shape=ellipse, color=green3, fontcolor=green3];
 "arm3_motor" -> "arm3_gearbox" 
 "arm3_gearbox" -> "arm3_link1"
 "arm3_link3_2" -> "arm3_joint3_2" 

@@ -189,7 +189,7 @@ Deshalb können auch geschlossene kinematische Ketten beschrieben werden.
 \label{chap:konvertierung}
 Damit für ein Roboter nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
 Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
-Die Konvertierung erfolgt im \textit{ROS}"=Node \textit{\textit{"}urdf\_spawner"} \footnote{\url{https://github.com/ros-simulation/gazebo\_ros\_demos/blob/kinetic-devel/rrbot\_gazebo/launch/rrbot\_world.launch}} zur Laufzeit, wenn das Roboter"=Modell in die Simulations"=Umgebung von \textit{Gazebo} geladen wird.
+Die Konvertierung erfolgt im \textit{ROS}"=Node \textit{\textit{"}urdf\_spawner"}~\footnote{\url{https://github.com/ros-simulation/gazebo\_ros\_demos/blob/kinetic-devel/rrbot\_gazebo/launch/rrbot\_world.launch}} zur Laufzeit, wenn das Roboter"=Modell in die Simulations"=Umgebung von \textit{Gazebo} geladen wird.
 Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
 Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
 In welchen Fällen es solche Spezial"=Elemente braucht und wie sie eingesetzt werden wird im Kapitel \ref{chap:kin-schliessen} gezeigt. 
@@ -281,9 +281,9 @@ Die Transformations"=Baumstruktur (TF-Tree) zu diesem einfachen Roboter ist in A
  %TODO übererbeiten und mit bild tf
 % Bild rrbot daneben bild mit tf graph
 \begin{figure}[ht!]
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{0.5\textwidth}
 	\centering
-	\includegraphics[width=8cm]{images/Transformation.png}
+	\includegraphics[width=7cm]{images/Transformation.png}
 	\caption{Beispiel: Transformation}
 	\label{Ab:transformation}
 \end{minipage}
