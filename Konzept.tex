@@ -189,10 +189,10 @@ Deshalb können auch geschlossene kinematische Ketten beschrieben werden.
 \label{chap:konvertierung}
 Damit für ein Roboter nicht zwei Dateien erstellt und instand gehalten werden müssen gibt es eine Lösung.
 Die Lösung besteht darin die \textit{URDF}"=Datei in eine \textit{SDF}"=Datei zu konvertieren.
+Die Konvertierung erfolgt im \textit{ROS}"=Node \textit{\textit{"}urdf\_spawner"} \footnote{\url{https://github.com/ros-simulation/gazebo\_ros\_demos/blob/kinetic-devel/rrbot\_gazebo/launch/rrbot\_world.launch}} zur Laufzeit, wenn das Roboter"=Modell in die Simulations"=Umgebung von \textit{Gazebo} geladen wird.
 Das \textit{URDF}"=Format ist jedoch nicht so mächtig wie das \textit{SDF}"=Format.
 Um jedoch den ganzen Umfang der Möglichkeiten vom \textit{SDF}"=Format zu nutzen kann die \textit{URDF}"=Datei mit speziellen XML"=Elementen erweitert werden.
 In welchen Fällen es solche Spezial"=Elemente braucht und wie sie eingesetzt werden wird im Kapitel \ref{chap:kin-schliessen} gezeigt. 
-%TODO urdf loader
 
 \subsection{URDF-Modell}
 \label{urdf-modell}
@@ -209,10 +209,6 @@ Somit wird die Kinematische Struktur des Roboters nur von den  Joint"=Elementen 
 	\caption{Aufbau URDF \cite{ros}}
 	\label{Ab:aufbaut-urdf}
 \end{figure}
-
-%bilder -> https://ni.www.techfak.uni-bielefeld.de/files/URDF-XACRO.pdf
-
-% woh? erwähnen notation rpy -> ypr -> x-achse im = rotations achse 
 
 \subsubsection{Link}
 \label{chap:link}
@@ -231,7 +227,7 @@ Für jedes dieser aufgelisteten Sub"=Element muss dessen Ursprung bezüglich des
 	\caption{Schematische Darstellung Link"=Element \cite{ros}}
 	\label{Ab:aufbaut-link}
 \end{figure}
-%In der Auflistung xx ist zusehen wie ein Link"=Element aufgebaut ist. 
+%TODO ref listiting motor
 
 \subsubsection{Joint}
 \label{chap:joint}
@@ -257,7 +253,7 @@ Die Beziehung dieser Angaben  zueinander ist in Abbildung \ref{Ab:aufbaut-joint}
 \end{figure}
 
 
-%Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref
+%Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref listing motor
 
 
 \section{Transformationen} % Bezugssystem
@@ -279,13 +275,37 @@ Das Wurzel"=Element dieses Baumes ist meistens das Welt"=Koordinatensystem.
 %In \textit{ROS} werden aber nicht \textsc{"}absolute\textsc{"} Koordinatensysteme verwendet, sondern Transformationen zwischen den Koordinatensystemen.
 %Somit sind die Position und Orientierung eines Koordinatensystems immer in Bezug  zu einem  
 
-Zur Veranschaulichung ein Beispiel: %TODO übererbeiten und mit bild tf
+Zur Veranschaulichung dieser Sachverhalte wird ein Beispiel eines einfachen Roboters mit zwei Gliedern und einem Gelenk gezeigt (zusehen in Abbildung \ref{chap:transformationen}).
+Die Transformations"=Baumstruktur (TF-Tree) zu diesem einfachen Roboter ist in Abbildung \ref{Ab:tf-tree} dargestellt.
+
+ %TODO übererbeiten und mit bild tf
 % Bild rrbot daneben bild mit tf graph
 \begin{figure}[ht!]
+\begin{minipage}{0.48\textwidth}
 	\centering
 	\includegraphics[width=8cm]{images/Transformation.png}
-	\caption{Transformation}
+	\caption{Beispiel: Transformation}
 	\label{Ab:transformation}
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1,node distance=6.5mm,
+	link/.style={rectangle, draw=black, thick, inner sep=7},
+	>=latex]
+ 	
+ \node[link] (world) {world}; 
+ \node[link, above=of world] (linkR) {link\_R};
+ \node[link, above=of linkR] (linkG) {link\_G};
+ 
+ \path[->, thick]
+ 	(world) edge (linkR)
+ 	(linkR) edge (linkG);
+ 
+\end{tikzpicture}
+	\caption{Beispiel: TF-Tree}
+	\label{Ab:tf-tree}
+
+\end{minipage}
 \end{figure}
 
 Man berechnet das Koordinatensystem des grünen Gliedes in Bezug zu der Welt wie folgt:

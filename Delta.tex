@@ -1,18 +1,22 @@
 \chapter{EEDURO-Delta-Roboter}
-
-%TODO Anhang alle Datenblätter für Modell
-
-In diesem Kapitel wird das zweite Fallbeispiel mit dem EEDURO-Delta-Roboter vorgestellt.
+In diesem Kapitel wird das zweite Fallbeispiel mit dem EEDURO-Delta-Roboter (Abbildung \ref{Ab:eeduro}) vorgestellt.
 Der EEDURO-Delta ist ein kleiner Delta-Roboter, der für Schulungszwecke gedacht ist.
 Die Modell-Beschreibung des Roboters ist im \textit{URDF}"=Format gehalten.
 Dabei wurde gleich vorgegangen wie für die Motor"=Apparatur\footnote{siehe Kapitel \ref{chap:motor}}, deshalb werden in diesem Kapitel nur noch neue Aspekte erläutert.
-%TODO bild
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=7cm]{images/eeduro_delta.png}
+	\caption{EEDURO-Delta \cite{eeduro}}
+	\label{Ab:eeduro}
+\end{figure}
 
-Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} eingesetzt wurde.
 
 \section{Modell}
 \label{chap:delta-modell}
-Die Modell"=Beschreibung des Deltaroboters wurde %TODO fertig machen und ref auf xacro
+Die Modell"=Beschreibung des Deltaroboters wurde im \textit{URDF}"=Format erstellt.
+Die ganze Datei ist im Repository \textit{\textit{"}eeduro\_delta\textit{"}}~\footnote{\url{https://github.com/manuelilg/eeduro_delta/tree/master/eeduro_delta_description/urdf}} abgelegt.
+Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} beim erstellen der \textit{URDF}"=Datei eingesetzt wurde.
+
 Das Modell des Delta-Roboter kann grob in drei gleiche Teile aufgeteilt werden:
 \begin{itemize}
 \item Rahmen (base)

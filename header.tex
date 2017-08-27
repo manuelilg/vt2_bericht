@@ -181,7 +181,7 @@
 \definecolor{darkred}{rgb}{0.6,0,0}
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 \definecolor{red}{rgb}{0.98,0,0}
-\lstloadlanguages{C,C++} % entsprechende Sprachen werden hier schon mal geladen, damit das Übersetzen schneller geht
+\lstloadlanguages{C,C++,xml} % entsprechende Sprachen werden hier schon mal geladen, damit das Übersetzen schneller geht
 \lstset{%
   language=C,
   basicstyle=\footnotesize\ttfamily,
@@ -197,10 +197,11 @@
   breaklines=true,
   showstringspaces=false,
   xleftmargin=1cm,
-  tabsize=2
+  tabsize=2,
+  escapeinside={(*}{*)}
 }%
 
-
+\renewcommand{\lstlistingname}{Auflistung}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -337,6 +338,8 @@
   filecolor=LinkColor,
   menucolor=LinkColor,
   urlcolor=LinkColor}
+
+\renewcommand*{\UrlFont}{\footnotesize}
 
 % Packet um Dateien in das PDF einzubetten
 \usepackage{attachfile}
