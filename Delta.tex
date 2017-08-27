@@ -10,29 +10,35 @@ Dabei wurde gleich vorgegangen wie für die Motor"=Apparatur\footnote{siehe Kapi
 	\label{Ab:eeduro}
 \end{figure}
 
-
 \section{Modell}
 \label{chap:delta-modell}
 Die Modell"=Beschreibung des Deltaroboters wurde im \textit{URDF}"=Format erstellt.
 Die ganze Datei ist im Repository \textit{\textit{"}eeduro\_delta\textit{"}}~\footnote{\url{https://github.com/manuelilg/eeduro_delta/tree/master/eeduro_delta_description/urdf}} abgelegt.
 Speziell ist aber das zusätzlich noch die Skriptsprache \textit{XACRO}\footnote{siehe Kapitel \ref{chap:xacro}} beim erstellen der \textit{URDF}"=Datei eingesetzt wurde.
 
-Das Modell des Delta-Roboter kann grob in drei gleiche Teile aufgeteilt werden:
-\begin{itemize}
-\item Rahmen (base)
-\item Arm (arm 1-3)
-\item Werkzeug (tool)
-\end{itemize}
+%Das Modell des Delta-Roboter kann grob in drei gleiche Teile aufgeteilt werden:
+%\begin{itemize}
+%\item Rahmen (base)
+%\item Arm (arm 1-3)
+%\item Werkzeug (tool)
+%\end{itemize}
+%
+%Der Arm selber besteht aus einem Oberarm auch Link 1 genannt und aus einem Unterarm.
+%Der Unterarm selber besteht selber wieder aus:
+%\begin{itemize}
+%\item Doppelgabel (Link 2)
+%\item zwei Stangen (Link 3.1 und Link 3.2)
+%\item 2.Doppelgabel (Link 4)
+%\end{itemize}
 
-Der Arm selber besteht aus einem Oberarm auch Link 1 genannt und aus einem Unterarm.
-Der Unterarm selber besteht selber wieder aus:
-\begin{itemize}
-\item Doppelgabel (Link 2)
-\item zwei Stangen (Link 3.1 und Link 3.2)
-\item 2.Doppelgabel (Link 4)
-\end{itemize}
+Die Benennung der unterschiedlichen Teile ist in Abbildung \ref{Ab:delta-schematisch} aufgezeigt.
 
-%TODO schema roboter
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=6cm]{images/delta.png}
+	\caption{Schematische Darstellung Delta-Roboter}
+	\label{Ab:delta-schematisch}
+\end{figure}
 
 Wie beim Motor muss die kinematisch Kette geschlossen werden mit dem \textit{SDF}"=Joint Element (dargestellt in Abbildung \ref{Ab:delta-struktur} mit grünen Ellipsen).
 
@@ -52,7 +58,7 @@ In diesem Abschnitt wird darauf eingegangen, welche Parameter es braucht für di
 \end{itemize}
 
 Ein Teil dieser Parameter konnten aus Datenblättern gewonnen werden.
-Diese Datenblätter sind im Repository xx zu finden. %TODO ref
+Diese Datenblätter sind im Repository \textit{\textit{"}eeduro\_delta\textbf{"}}~\footnote{\url{https://github.com/manuelilg/eeduro\_delta/tree/master/eeduro\_delta\_description/datasheets}} zu finden.
 
 \subsubsection{Berechnung Masse und Trägheitstensor}
 Für jedes Glied musste die Masse und Rotationsträgheit berechnet werden, damit das Modell des Roboters sich in der Simulation wie der reale Roboter verhält.
@@ -61,25 +67,25 @@ Dieser Umstand verkompliziert die Berechnung sehr.
 Auch erschwerend kam hinzu, dass die CAD"=Daten nur im \textit{STEP}"=Austauschformat vorliegend waren.
 
 Das führt zu folgendem Arbeitsablauf:
-\begin{itemize}
-\item für jedes Glied/Baugruppe eine CAD"=Datei erstellen
-\item für jede CAD"=Datei:
-\begin{itemize}
-\item für jedes Bauteil folgende Daten exportieren
-\begin{itemize}
+\begin{enumerate}
+\item für jedes Glied/Baugruppe: 
+\begin{enumerate}
+\item eine CAD"=Datei erstellen
+\item für jedes Bauteil in Baugruppe folgende Daten exportieren
+\begin{enumerate}
 \item Volumen von Körper
 \item Schwerpunkt von Körper
 \item Rotationsträgheit"=Tensor von Volumen
-\end{itemize}
+\end{enumerate}
 \item exportierte Daten in Matlab eintragen
 \item für jedes Bauteil Dichte in Matlab hinterlegen
 \item für jedes Bauteil mit Dichte: Masse und Rotationsträgheit ausrechnen  
-\end{itemize}
+\end{enumerate}
 \item Schwerpunkt und Masse von Baugruppe bestimmen
 \item Rotationsträgheit von Baugruppe ausrechnen (Steinerscher Satz für jedes Bauteil anwenden)
-\end{itemize}
+\end{enumerate}
 
-Die CAD"=Daten und Matlab"=Dateien sind im Repository xx zufinden.
+Die CAD"=Daten und Matlab"=Dateien sind im Repository \textit{\textit{"}eeduro\_delta\textit{"}}~\footnote{\url{https://github.com/manuelilg/eeduro_delta/tree/master/eeduro_delta_description}} zufinden.
 
 \subsubsection{XACRO}
 \label{chap:xacro}
@@ -133,7 +139,7 @@ In Abbildung \ref{Ab:prozess} ist der ganze Prozess"=Graph mit allen beteiligten
 \end{figure}
 
 \section{Installation}
-In diesem Abschnitt wird die Installation des Repository \textit{\textit{"}eeduro\_delta\textbf{•}} gezeigt.
+In diesem Abschnitt wird die Installation des Repository \textit{\textit{"}eeduro\_delta\textbf{"}} gezeigt.
 
 Alle erforderliche Repositorys in \textit{Workspace} klonen:
 \begin{lstlisting}

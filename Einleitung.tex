@@ -1,17 +1,5 @@
 \chapter{Einleitung}
-%\begin{itemize}
-%\item ros konzepte kurz vorstellen wie:
-%	\begin{itemize}
-%	\item msg
-%	\item topic
-%	\item node
-%	\end{itemize}
-%\item ros-ökosystem: gazebo, rviz, rqt
-%\end{itemize}
 \section{Motivation}
-%TODO einleitung in motivaiton
-
-
 Bei der Entwicklung von \textit{EEROS}"=Applikationen muss immer eine Hardware vorhanden sein für die die Applikation entwickelt wird.
 Dies ist vor allem beim Beginn der Entwicklung ein erschwerender Umstand, da bei Fehlern die Hardware beschädigt werden kann.
 Auch gibt es keine einfache und praktische Möglichkeit die Grössen und Zustände von einem System ansprechend zu visualisieren.
@@ -20,9 +8,6 @@ Auch gibt es keine einfache und praktische Möglichkeit die Grössen und Zustän
 \section{Aufgabenstellung}
 Das Ziel dieser Arbeit ist zu evaluieren, wie \textit{ROS} als unterstützendes Werkzeug für \textit{EEROS}"=Applikationen eingesetzt werden kann.
 Dabei soll vor allem ein Werkzeug für Simulationen und eines für Visualisierungen gefunden werden.
-
-%TODO sim und viz erwähnen
-%TODO synchron mit 
 Dafür soll zuerst ein Konzept ausgearbeitet werden, in dem unter anderem geklärt wird, wie die Schnittstellen zwischen \textit{ROS} und \textit{EEROS} aussehen.
 Das Konzept soll anschliessend für zwei Fallbeispiele umgesetzt werden.
 Eine einfache Motor"=Apparatur dient als erstes Fallbeispiel.
@@ -76,11 +61,26 @@ Darum werden die Nachrichten unter einem Thema (Topic) ausgetauscht.
 
 \subsection{EEROS} \mbox{}\\
 \textit{EEROS}\footnote{\url{http://eeros.org}} ist ein Roboter"=Framework mit Fokus auf die Ausführung von Echtzeit"=Aufgaben.
-Somit ist es geeignet für die Umsetzung von untergeordneten Aufgaben in einer Roboteranwendung, wie das Regeln von einem Motor.
-
+Somit ist es geeignet für die Umsetzung von low-level Aufgaben in einer Roboteranwendung, wie das Regeln von einem Motor.
 
 \section{Zusammenarbeit}
 An der Ausarbeitung des Konzeptes hat Marcel Gehrig aktiv mitgewirkt.
-Denn die \textit{ROS}"=Schnittstelle im \textit{EEROS}, die er im Rahmen seiner Arbeit \textit{\textit{"}Eine ROS Anbindung für EEROS\textit{"}}\footnote{siehe Anhang xx} entwickelt hat, ist eine integraler Bestandteil des Konzepts.
+Denn die \textit{ROS}"=Schnittstelle im \textit{EEROS}, die er im Rahmen seiner Arbeit \textit{\textit{"}Eine ROS Anbindung für EEROS\textit{"}}~\footnote{\url{https://github.com/MarcelGehrig2/berichtVt2/blob/FinalRelease/Bericht.pdf}} aus dem Jahr 2017 entwickelt hat, ist eine integraler Bestandteil des Konzepts.
 Auch hat er die \textit{EEROS}"=Applikation für das Fallbeispiel Motor"=Apparatur entwickelt und somit die Umsetzung des Fallbeispiels validiert.
-%TODO verweis arbeit
+
+\section{Repositories}
+Alle in dieser Arbeit erwähnten Repositories sind öffentlich und auf GitHub gehostet.
+
+\begin{tabular}
+  { l						l			 												l						}
+
+% Name						URL   														Branch     			
+  \textbf{Name}				& \textbf{URL}												& \textbf{Branch}		\\
+  motor\_sim				& https://github.com/manuelilg/motor\_sim.git				& master				\\
+  eeduro\_delta				& https://github.com/manuelilg/eeduro\_delta.git			& master				\\
+  gazebo\_ros\_joint\_force	& https://github.com/manuelilg/gazebo\_ros\_joint\_force.git& master		 		\\
+  gazebo\_ros\_pkgs			& https://github.com/manuelilg/gazebo\_ros\_pkgs.git		& master				\\
+  Bericht					& https://github.com/manuelilg/vt2\_bericht.git				& master				\\
+  EEROS-ROS					& https://github.com/MarcelGehrig2/VT2/tree/master/Software	& master				\\
+	
+\end{tabular}
