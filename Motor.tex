@@ -126,8 +126,6 @@ Ein Ausschnitt aus dieser Datei ist in Auflistung \ref{lst:motor-urdf} gezeigt.
 \end{lstlisting}
 
 
-%TODO ref auf joint, link
-
 \subsection{Kinematische Kette schliessen}
 \label{chap:kin-schliessen}
 Das \textit{URDF}"=Format kann keine geschlossenen kinematischen Strukturen abbilden.
@@ -200,7 +198,7 @@ Mit den in Auflistung \ref{lst:plugin} gezeigten Zeilen werden zwei \textit{Gaze
     </plugin>
   </gazebo>
 \end{lstlisting}
-%TODO vergleiche kapitel gazebo plugins ??
+
 Das Plugin \textit{\textit{"}gazebo\_ros\_joint\_state\_publisher\textit{"}} misst den Winkel von Gelenk \textit{\textit{"}motor\_axis\textit{"}} und stellt den Messwert zu Verfügung (publish).\\
 Es ist im Standard \textit{ROS"=Package} \textit{\textit{"}gazebo\_ros\_pkgs\textit{"}}~\footnote{\url{http://wiki.ros.org/gazebo_ros_pkgs}} enthalten.
 Achtung das Gazebo"=Plugin \textit{\textit{"}gazebo\_ros\_joint\_state\_publisher\textit{"}} ist nicht mit dem ROS"=Knoten \textit{\textit{"}joint\_state\_publisher\textit{"}} zu verwechseln.

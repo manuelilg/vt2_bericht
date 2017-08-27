@@ -24,7 +24,7 @@ Und \textit{ROS} die Aufgaben der Simulation und der Visualisierung.
 \end{figure}
 
 Damit \textit{EEROS} mit \textit{ROS}"=Komponenten kommunizieren kann, wurde ein \textit{ROS}"=Node ins \textit{EEROS} integriert.
-Diese Integration wird in der Arbeit xx erklärt. %TODO ref mäsis arbeit
+Diese Integration wird in der Arbeit \textit{\textit{"}Eine ROS Anbindung für EEROS\textit{"}}~\footnote{\url{https://github.com/MarcelGehrig2/berichtVt2/blob/FinalRelease/Bericht.pdf}} aus dem Jahr 2017 von Marcel Gehrig erklärt. 
 Somit hat \textit{EEROS} die Fähigkeit über das \textit{ROS}"=Kommunikationsprinzip \textit{Publish\,\&\,Subscribe} Daten auszutauschen.
 Das Konzept sieht vor, das \textit{EEROS} wahlweise einen echten oder simulierten Roboter steuert und regelt.
 %Mit dem Begriff System werden in dieser Arbeit allgemein mechatronische Systeme wie zum Beispiel ein Roboter bezeichnet.
@@ -111,7 +111,7 @@ Da \textit{RViz} nicht direkt die Gelenkwinkel interpretieren kann, müssen dies
 
 \section{Gazebo}
 \label{chap:gazebo}
-\textit{Gazebo} ist eine Starrkörper"=Simulationsumgebung für Mehrkörper"=Systeme.
+\textit{Gazebo} (siehe Abbildung \ref{Ab:gazebo}) ist eine Starrkörper"=Simulationsumgebung für Mehrkörper"=Systeme.
 Vom System das man simulieren möchte, muss eine System"=Beschreibung in Form von einer \textit{SDF}"=Datei erstellt werden.
 \textit{Gazebo} baut dann die Simulation anhand dieser Datei auf. 
 In unserem Fall wird im \textit{SDF}\footnote{siehe Kapitel \ref{chap:sdf}} das Roboter"=Modell beschrieben.
@@ -121,10 +121,17 @@ Dabei kann man schon fertige Plugins verwenden, oder selber eines programmieren.
 Im Zusammenhang mit diesem Konzept, werden die Plugins für die Kommunikation mit dem \textit{EEROS} eingesetzt.
 Ein Plugin wird für das Applizieren der Stellgrösse (Drehmoment) auf das Gelenk eingesetzt und eines für die Messung und Rückführung (publish) des Gelenkwinkels.
 
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=5.5cm]{images/gazebo.png}
+	\caption{Gazebo}
+	\label{Ab:gazebo}
+\end{figure}
+
 
 \section{RViz}
 \label{chap:rviz}
-Mit dem Visualisierungs"=Tool \textit{RViz} kann der Zustand vom Roboter visualisiert werden.
+Mit dem Visualisierungs"=Tool \textit{RViz} (siehe Abbildung \ref{Ab:rviz}) kann der Zustand vom Roboter visualisiert werden.
 Der Zustand ist die momentane Stellung von den Gelenken des Roboters, oder einfacher ausgedrückt die Pose des Roboters.
 Auch wird \textit{RViz} eingesetzt für die Visualisierung von anderen Daten wie z.B. die Sensor"=Daten einer 3D"=Kamera.
 
@@ -142,13 +149,12 @@ Um ein Körper im Raum darzustellen, braucht \textit{RViz} eine Angabe zur Posit
 Diese Angabe wird als Transformation\footnote{siehe Kapitel \ref{chap:transformationen}} bezeichnet.
 \textit{RViz} erhält laufend diese Transformations"=Daten von einem \textit{ROS}"=Knoten und kann anhand von diesen, den aktuellen Zustand des Roboters visualisieren.
 
-%Und aus den Transformations"=Daten die \textit{RViz} laufend erhält, kann es die Position und Orientierung jedes Körpers berechnen.
-%Und Informationen über die Position und Orientierung jedes Körpers kann \textit{RViz} über Transformationen.
-%Eine Transformationen beschreiben wie ein Koordinatensystem relative zu einem anderen steht.   
-
-%Für die Darstellung der Körper im Raum benötigt \textit{rviz} für jeden Körper noch die Position und Orientierung von diesem im Raum.
-%Deshalb müssen dem \textit{rviz} stetig Koordinaten-Daten für jeden Körper übermittelt werden. %TODO ref tf
-
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=5.5cm]{images/rviz.png}
+	\caption{RViz}
+	\label{Ab:rviz}
+\end{figure}
 
 \section{RQt}
 \label{chap:rqt}
@@ -157,16 +163,18 @@ Diese GUI's werden als Plugins implementiert.
 Somit können mehre GUI's in einem \textit{RQt}"=Fenster verwendet werden.
 Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins\footnote{\url{http://wiki.ros.org/rqt/Plugins}}.
 Es können aber auch selbst programmierte Plugins verwendet werden. 
-Für die Visualisierung von zeitabhängigen Grössen wird das \textit{RQt}"=Plugin \textit{multiplot}\footnote{\url{http://wiki.ros.org/rqt_multiplot}} eingesetzt. %TODO bild?
+Für die Visualisierung von zeitabhängigen Grössen wird das \textit{RQt}"=Plugin \textit{multiplot}\footnote{\url{http://wiki.ros.org/rqt_multiplot}} (siehe Abbildung \ref{Ab:rqt}) eingesetzt.
 
-%gui-tool, für das plugins vorhanden sind oder selber geschrieben werden können
-%hat für viele gängige ros-cli-tools ein RQt-plugin
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=5.5cm]{images/rqt.png}
+	\caption{RQt\_multiplot}
+	\label{Ab:rqt}
+\end{figure}
 
 
 \section{Roboter-Modell} % Roboter"=Modell
 \label{chap:roboter-modell}
-%TODO titel mehrdeutig mehr so was wie: Datei-formate für beschreibung von Systemen, repräsentation, abbildung, Format für repräsentation von Systemen
-
 Die Programme \textit{Gazebo} und \textit{RViz} verwenden zwei unterschiedliche Datei"=Formate für die Modell"=Beschreibung.
 Beide sind im XML"=Stil gehalten und repräsentieren kinematische Strukturen.
 Diese Strukturen sind aus Gliedern (Links) und Gelenken (Joints) aufgebaut.
@@ -227,7 +235,6 @@ Für jedes dieser aufgelisteten Sub"=Element muss dessen Ursprung bezüglich des
 	\caption{Schematische Darstellung Link"=Element \cite{ros}}
 	\label{Ab:aufbaut-link}
 \end{figure}
-%TODO ref listiting motor
 
 \subsubsection{Joint}
 \label{chap:joint}
@@ -253,9 +260,6 @@ Die Beziehung dieser Angaben  zueinander ist in Abbildung \ref{Ab:aufbaut-joint}
 \end{figure}
 
 
-%Wie ein Joint"=Element aufgebaut sieht man in der Auflistung xx. %TODO ref listing motor
-
-
 \section{Transformationen} % Bezugssystem
 \label{chap:transformationen}
 Eine Transformation beschreibt, wie ein Koordinatensystem relativ zu einem anderen steht.
@@ -278,8 +282,7 @@ Das Wurzel"=Element dieses Baumes ist meistens das Welt"=Koordinatensystem.
 Zur Veranschaulichung dieser Sachverhalte wird ein Beispiel eines einfachen Roboters mit zwei Gliedern und einem Gelenk gezeigt (zusehen in Abbildung \ref{chap:transformationen}).
 Die Transformations"=Baumstruktur (TF-Tree) zu diesem einfachen Roboter ist in Abbildung \ref{Ab:tf-tree} dargestellt.
 
- %TODO übererbeiten und mit bild tf
-% Bild rrbot daneben bild mit tf graph
+
 \begin{figure}[ht!]
 \begin{minipage}{0.5\textwidth}
 	\centering
