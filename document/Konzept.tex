@@ -120,10 +120,9 @@ Mit Plugins kann \textit{Gazebo} mit Funktionen erweitert werden.
 Dabei kann man schon fertige Plugins verwenden, oder selber eines programmieren.
 Im Zusammenhang mit diesem Konzept, werden die Plugins für die Kommunikation mit dem \textit{EEROS} eingesetzt.
 Ein Plugin wird für das Applizieren der Stellgrösse (Drehmoment) auf das Gelenk eingesetzt und eines für die Messung und Rückführung (publish) des Gelenkwinkels.
-
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=5.5cm]{images/gazebo.png}
+	\includegraphics[width=10cm]{images/gazebo.png}
 	\caption{Gazebo}
 	\label{Ab:gazebo}
 \end{figure}
@@ -148,10 +147,9 @@ Normalerweise wird das Welt"=Koordinatensystem gewählt.
 Um ein Körper im Raum darzustellen, braucht \textit{RViz} eine Angabe zur Position und Orientierung, relative zum Referenz"=Koordinatensystem.
 Diese Angabe wird als Transformation\footnote{siehe Kapitel \ref{chap:transformationen}} bezeichnet.
 \textit{RViz} erhält laufend diese Transformations"=Daten von einem \textit{ROS}"=Knoten und kann anhand von diesen, den aktuellen Zustand des Roboters visualisieren.
-
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=5.5cm]{images/rviz.png}
+	\includegraphics[width=10cm]{images/rviz.png}
 	\caption{RViz}
 	\label{Ab:rviz}
 \end{figure}
@@ -164,10 +162,9 @@ Somit können mehre GUI's in einem \textit{RQt}"=Fenster verwendet werden.
 Für fast jedes gängige \textit{ROS}-Command-line-Tool gibt es schon Plugins\footnote{\url{http://wiki.ros.org/rqt/Plugins}}.
 Es können aber auch selbst programmierte Plugins verwendet werden. 
 Für die Visualisierung von zeitabhängigen Grössen wird das \textit{RQt}"=Plugin \textit{multiplot}\footnote{\url{http://wiki.ros.org/rqt_multiplot}} (siehe Abbildung \ref{Ab:rqt}) eingesetzt.
-
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=5.5cm]{images/rqt.png}
+	\includegraphics[width=10cm]{images/rqt.png}
 	\caption{RQt\_multiplot}
 	\label{Ab:rqt}
 \end{figure}
@@ -254,7 +251,7 @@ Die zwei häufigsten Gelenk"=Typ die verwendet werden sind:
 Die Beziehung dieser Angaben  zueinander ist in Abbildung \ref{Ab:aufbaut-joint} dargestellt.
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=5.5cm]{images/urdf_joint.png}
+	\includegraphics[width=4.5cm]{images/urdf_joint.png}
 	\caption{Schematische Darstellung Joint"=Element \cite{ros}}
 	\label{Ab:aufbaut-joint}
 \end{figure}
